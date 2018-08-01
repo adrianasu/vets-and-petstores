@@ -8,19 +8,57 @@ let map;
 function initMap(coordinates) {
     map = new google.maps.Map(document.getElementById('map'), {
         center: coordinates,
-        zoom: 15
+        zoom: 11
     });
+    //drawMarkers(locations, labels);
 }
 
+var contentString = "hello";
+
+function drawMarkers(locations, labels) {
+    let color = "#FF0000"
+    if (labels == "12345") {
+        color = "purple";
+    }
+    var circleMarker = locations.map(function (location, i) {
+        return new google.maps.Circle({
+            strokeColor: color,
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: color,
+            fillOpacity: 0.35,
+            position: location,
+            //label: labels[i % labels.length],
+            //title: "title",
+            //label: "hello",
+            radius: 600,
+            center: location,
+            map: map,
+    });
+});
+    // Add some markers to the map.
+    // Note: The code uses the JavaScript Array.prototype.map() method to
+    // create an array of markers based on a given "locations" array.
+    // var markers = locations.map(function (location, i) {
+    //     return new google.maps.Marker({
+    //         position: location,
+    //         label: labels[i % labels.length],
+    //         map: map,
+           
+    //     });
+    // });
+}    
+
+
 function getDataFromYelp (searchTerm, zipcode, callback, page) {
-    var settings = {
+    let settings = {
         url: cors_url+yelp_url,
         headers: {authorization: `Bearer ${yelp_key}`},
         data: {
             term: searchTerm,
             location: zipcode,
-            radius: 32186,
-            limit: 10,
+            radius: 24140,
+            limit: 1,
             offset: page,
         },
         type: "GET",
@@ -56,6 +94,7 @@ function generateArrayWithCoordinates(data, item) {
     return coordinates;
 }
 
+
 function displayVetsResults(vetsData) {
     let vetsString = [];
     let vetsCoordinates = [];
@@ -67,6 +106,8 @@ function displayVetsResults(vetsData) {
     $('.js-vets-results').html(vetsString);
     let center = vetsCoordinates[0];
     initMap(center);
+    var labels = 'ABCDE';
+    drawMarkers(vetsCoordinates, labels);
 }
 
 function displayPetStoresResults(storesData) {
@@ -78,8 +119,8 @@ function displayPetStoresResults(storesData) {
     }
     storesString.join("");
     $('.js-pet-stores-results').html(storesString);
-    console.log(storesCoordinates);
-
+    var labels = '12345';
+    drawMarkers(storesCoordinates, labels);
 }
 
 function handleErrors(xhr, status, error) {
