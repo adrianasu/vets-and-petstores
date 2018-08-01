@@ -2,6 +2,8 @@ const rescue_org_url = "https://api.rescuegroups.org/http/";
 const yelp_url = "https://api.yelp.com/v3/businesses/search";
 const cors_url = "https://cors-anywhere.herokuapp.com/";
 const yelp_key = "SWqIeR03-4XLVB2rjSFheWjyG83SJbP_2TlwQGQF1AJhCq77pgSLmihlbN6TDYNg5ErnOPjjRs2YrRLeqx_riAQDuUXQdOb-pcv-ktebeXRa_BT3Wf7gNaS5j_teW3Yx";
+const google_maps_key = "AIzaSyCeqMDyG-nlak99Pbi88_TATn2xc5WQZEE";
+
 
 
 function getDataFromYelp (searchTerm, zipcode, callback, page) {
@@ -42,64 +44,41 @@ function generateString(data, item) {
             <img src="${data.businesses[item].image_url}">`;
 }
 
+function generateArrayWithCoordinates(data, item) {
+    let coordinates = {};
+    coordinates.lng = data.businesses[item].coordinates.longitude;
+    coordinates.lat = data.businesses[item].coordinates.latitude;
+    return coordinates;
+}
+
 function displayVetsResults(vetsData) {
     let vetsString = [];
+    let vetsCoordinates = [];
     for(let i=0; i<= vetsData.businesses.length-1; i++) {
         vetsString.push(generateString(vetsData, i));
+        vetsCoordinates.push(generateArrayWithCoordinates(vetsData, i));
     }
     vetsString.join("");
     $('.js-vets-results').html(vetsString);
+    console.log(vetsCoordinates);
 }
 
 function displayPetStoresResults(storesData) {
     let storesString = [];
+    let storesCoordinates = [];
     for (let i = 0; i<= storesData.businesses.length-1; i++) {
         storesString.push(generateString(storesData, i));
+        storesCoordinates.push(generateArrayWithCoordinates(storesData, i));
     }
     storesString.join("");
     $('.js-pet-stores-results').html(storesString);
+    console.log(storesCoordinates);
+
 }
 
 function handleErrors(xhr, status, error) {
     console.log('error ' + error);
 }
-
-// function getDataFromRescueOrg(animal, callback) {
-//     var search = {
-//         "apikey": "4ce69ee078d7f0d73ae36e0402eb6b34",
-//         "objectType": "animals",
-//         "objectAction": "publicSearch",
-//         "search": {
-//             "calcFoundRows": "Yes",
-//             "resultStart": 0,
-//             "resultLimit": 0,
-//             "fields": ["animalName"],
-//             "filters": [{
-//                 "fieldName": "animalStatus",
-//                 "operation": "equals",
-//                 "criteria": "Adopted"
-//             }, {
-//                 "fieldName": "animalOrgID",
-//                 "operation": "equals",
-//                 "criteria": "****"
-//             }]
-//         }
-//     };
-//     var encoded = $.toJSON(search)
-//     const settings = {
-//         url: "https://api.rescuegroups.org/http/json/?data=" + encoded,
-//         dataType: "jsonp",
-//         success: callback,
-//         //error: handleErrors,
-//     }
-//     $.ajax(settings);
-// }
-
-// function displayResults(data) {
-//     $('.js-search-results').html(`<p>${data}</p>`);
-//     console.log(data);
-// }
-
 
 
 function handleSearch(event) {
