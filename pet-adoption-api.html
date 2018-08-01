@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="description" content="Search pets available for adoption">
+	<meta name="author" content="Adriana Suarez">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<title>Pet Adoption and more</title>
+	<link rel="stylesheet" href="main.css">
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+	<div> 
+		<form class="js-form">
+			<fieldset name="pet-search">
+				<legend>Looking for a vet or pet store?</legend>
+					<label for="zip-code">Zip Code
+						<input type="text" id="zip-code" size="5" 
+							   minlength="5" maxlength="5" required>
+					</label>			
+			</fieldset>
+			<button role="button" type="submit">Go!</button>
+		</form>
+	</div>
+	<div class="js-vets-results hidden"></div>
+	<div class="js-pet-stores-results hidden"></div>
+	<div class="js-map hidden"></div>
+	<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
