@@ -3,8 +3,14 @@ const yelp_url = "https://api.yelp.com/v3/businesses/search";
 const cors_url = "https://cors-anywhere.herokuapp.com/";
 const yelp_key = "SWqIeR03-4XLVB2rjSFheWjyG83SJbP_2TlwQGQF1AJhCq77pgSLmihlbN6TDYNg5ErnOPjjRs2YrRLeqx_riAQDuUXQdOb-pcv-ktebeXRa_BT3Wf7gNaS5j_teW3Yx";
 const google_maps_key = "AIzaSyCeqMDyG-nlak99Pbi88_TATn2xc5WQZEE";
+let map;
 
-
+function initMap(coordinates) {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: coordinates,
+        zoom: 15
+    });
+}
 
 function getDataFromYelp (searchTerm, zipcode, callback, page) {
     var settings = {
@@ -29,7 +35,6 @@ function getDataFromYelp (searchTerm, zipcode, callback, page) {
 function getVetData(zipcode, page) {
     let term = "veterinarians";
     getDataFromYelp(term, zipcode, displayVetsResults, page);
- 
 }
 
 function getPetStoreData(zipcode, page) {
@@ -60,7 +65,8 @@ function displayVetsResults(vetsData) {
     }
     vetsString.join("");
     $('.js-vets-results').html(vetsString);
-    console.log(vetsCoordinates);
+    let center = vetsCoordinates[0];
+    initMap(center);
 }
 
 function displayPetStoresResults(storesData) {

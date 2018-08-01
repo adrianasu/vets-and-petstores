@@ -1,3 +1,8 @@
 img {
     width: 100px;
 }
+
+#map {
+    width: 1000px;
+    height: 500px;
+}
