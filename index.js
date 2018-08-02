@@ -86,18 +86,19 @@ function getDataFromYelp (searchTerm, zipcode, callback, page) {
         success: callback,
         fail: handleErrors,
     };
-    $.ajax(settings);
+    return $.ajax(settings);
 
 }
 
-function getVetData(zipcode, page) {
+function getVetData(zipcode, page, callback) {
     let term = "veterinarians";
-    getDataFromYelp(term, zipcode, displayVetsResults, page);
+    return getDataFromYelp(term, zipcode, callback, page);
+
 }
 
-function getPetStoreData(zipcode, page) {
+function getPetStoreData(zipcode, page, callback) {
     let term = "pet stores";
-    getDataFromYelp(term, zipcode, displayPetStoresResults, page);
+    return getDataFromYelp(term, zipcode, callback, page);
 }
 
 function generateButtonString(data, item, labels) {
@@ -120,7 +121,7 @@ function generateBizInfoString(selected) {
 }
 
 
-function generateArrayWithCoordinates(data, item) {
+function generateObjectWithCoordinates(data, item) {
     let coordinates = {};
     coordinates.lng = data.businesses[item].coordinates.longitude;
     coordinates.lat = data.businesses[item].coordinates.latitude;
@@ -129,41 +130,73 @@ function generateArrayWithCoordinates(data, item) {
 
 
 function displayVetsResults(data) {
-    vetsData = data||{};
+    vetsData = data;
     let vetsString = [];
     let vetsCoordinates = [];
     var labels = 'ABCDE';
     vetsString.push(`<h2>Vets</h2>`);
-    if (Object.keys(vetsData).length === 0) {
+    if (!vetsData||!vetsData.businesses||!vetsData.businesses.length) {
         vetsString.push(`<p>No Results</p>`);
+        return data;
     }
-    for(let i=0; i<= vetsData.businesses.length-1; i++) {
+    for(let i=0; i< vetsData.businesses.length; i++) {
         vetsString.push(generateButtonString(vetsData, i, labels));
-        vetsCoordinates.push(generateArrayWithCoordinates(vetsData, i));
+        vetsCoordinates.push(generateObjectWithCoordinates(vetsData, i));
     }
-
     vetsString.join("");
     $('.js-vets-results').html(vetsString);
-    let center = vetsCoordinates[0];
-    initMap(center);
     drawMarkers(vetsData, vetsCoordinates, labels);
+    return data;
+}
+
+function setCenterOfMap(coordinateOrFirstResults, secondResults) {
+    let coordinate = coordinateOrFirstResults;
+    let allLong = [];
+    let allLat = [];
+   
+   
+    if(arguments.length === 2) {
+        for(let i=0; i<coordinateOrFirstResults.businesses.length; i++) {
+            allLong.push(coordinateOrFirstResults.businesses[i].coordinates.longitude);
+            allLat.push(coordinateOrFirstResults.businesses[i].coordinates.latitude);
+        }
+        for(let i=0; i<secondResults.businesses.length; i++) {
+            allLong.push(secondResults.businesses[i].coordinates.longitude);
+            allLat.push(secondResults.businesses[i].coordinates.latitude);
+        }
+        allLong.sort();
+        allLat.sort();
+        console.log(allLong);
+        console.log(allLat);
+        let averageLong = allLong[0]+(Math.abs(allLong[allLong.length-1]) - Math.abs(allLong[0]))/2;
+        let averageLat = allLat[0] + (Math.abs(allLat[allLat.length - 1]) - Math.abs(allLat[0])) / 2;
+        coordinate = {lng: averageLong,
+                        lat: averageLat
+                    }
+    }
+    if(map){
+        map.setCenter(coordinate);
+    }
 }
 
 function displayPetStoresResults(data) {
-    storesData = data || {};
+    storesData = data;
     let storesString = [];
     let storesCoordinates = [];
     var labels = '12345';
     storesString.push(`<h2>Pet Stores</h2>`);
-
-    for (let i = 0; i<= storesData.businesses.length-1; i++) {
+    if (!storesData || !storesData.businesses || !storesData.businesses.length) {
+        storesString.push(`<p>No Results</p>`);
+        return data;
+    }
+    for (let i = 0; i<storesData.businesses.length; i++) {
         storesString.push(generateButtonString(storesData, i, labels));
-        storesCoordinates.push(generateArrayWithCoordinates(storesData, i));
+        storesCoordinates.push(generateObjectWithCoordinates(storesData, i));
     }
     storesString.join("");
     $('.js-pet-stores-results').html(storesString);
     drawMarkers(storesData, storesCoordinates, labels);
-   
+    return data;
 }
 
 function handleErrors(xhr, status, error) {
@@ -186,22 +219,46 @@ function watchOptions() {
 
 function handleSearch(event) {
     event.preventDefault();
+    $('.js-vets-results, .js-pet-stores-results, #map').hide();
+    vetsData = {};
+    storesData = {};
     let zipcodeInput = $('#zip-code');
     let zipcode = zipcodeInput.val();
     zipcodeInput.val("");
-    getPetStoreData(zipcode, 0);
-    getVetData(zipcode, 0);
-    $('.js-vets-results, .js-pet-stores-results, #map').show();  
+    let page = 0;
+    return getPetStoreData(zipcode, page)
+        .then(petStores=> {
+            return getVetData(zipcode, page)
+                .then(vets=> {
+                    if(vets.businesses.length || petStores.businesses.length){
+                    //if code reaches here, both requests have been succesful
+                    setCenterOfMap(vets, petStores);   
+                    displayPetStoresResults(petStores);
+                    displayVetsResults(vets);
+                    $('.js-vets-results, .js-pet-stores-results, #map').show();
+                    }
+                    else {
+                        displayPetStoresResults(petStores);
+                        displayVetsResults(vets);
+                        $('.js-vets-results, .js-pet-stores-results').show();
+                    }
+                  
+                    
+            })
+        ;    
+        })
+    ; 
+
 }
 
 function watchSubmitButton() {
     $('.js-form').on('submit', handleSearch);
+    
 }
 
 function main() {
     watchSubmitButton();
     watchOptions();
-   
 }
 
 $(main);
