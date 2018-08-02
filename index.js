@@ -8,17 +8,17 @@ let map;
 function initMap(coordinates) {
     map = new google.maps.Map(document.getElementById('map'), {
         center: coordinates,
-        zoom: 11
+        zoom: 10
     });
     //drawMarkers(locations, labels);
 }
 
-var contentString = "hello";
+
 
 function drawMarkers(locations, labels) {
-    let color = "#FF0000"
+    let color = "purple"
     if (labels == "12345") {
-        color = "purple";
+        color = "orangered";
     }
     var circleMarker = locations.map(function (location, i) {
         return new google.maps.Circle({
@@ -58,7 +58,7 @@ function getDataFromYelp (searchTerm, zipcode, callback, page) {
             term: searchTerm,
             location: zipcode,
             radius: 24140,
-            limit: 1,
+            limit: 5,
             offset: page,
         },
         type: "GET",
@@ -81,11 +81,14 @@ function getPetStoreData(zipcode, page) {
 }
 
 function generateString(data, item) {
-    return `<h2>${data.businesses[item].name}</h2>
-            <p>${data.businesses[item].location.display_address[0]}</p>
-            <p>${data.businesses[item].display_phone}</p>
-            <img src="${data.businesses[item].image_url}">`;
+    return `<p>${data.businesses[item].name}</p>`
+    // return `<h2>${data.businesses[item].name}</h2>
+    //         <p>${data.businesses[item].location.display_address[0]}</p>
+    //         <p>${data.businesses[item].display_phone}</p>
+    //         <img src="${data.businesses[item].image_url}">`;
 }
+
+
 
 function generateArrayWithCoordinates(data, item) {
     let coordinates = {};
@@ -121,6 +124,7 @@ function displayPetStoresResults(storesData) {
     $('.js-pet-stores-results').html(storesString);
     var labels = '12345';
     drawMarkers(storesCoordinates, labels);
+    
 }
 
 function handleErrors(xhr, status, error) {
@@ -130,16 +134,14 @@ function handleErrors(xhr, status, error) {
 
 function handleSearch(event) {
     event.preventDefault();
-    let animalInput = $('#animal');
-    let animal = animalInput.val();
-    animalInput.val("");
     let zipcodeInput = $('#zip-code');
     let zipcode = zipcodeInput.val();
     zipcodeInput.val("");
-    console.log("zipcode " +zipcode);
     getVetData(zipcode, 0);
     getPetStoreData(zipcode, 0);
-
+    $('.js-vets-results, .js-pet-stores-results, #map').show();
+    
+   
 }
 
 
@@ -149,7 +151,6 @@ function watchSubmitButton() {
 
 function main() {
     watchSubmitButton();
-
 }
 
 $(main);
