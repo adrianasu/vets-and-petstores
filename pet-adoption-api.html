@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<title>Vets and Pet Stores</title>
+	<!-- Normalize.css, a cross-browser reset file -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
 	<link rel="stylesheet" href="main.css">
 	<script
   src="https://code.jquery.com/jquery-3.3.1.js"
@@ -23,18 +25,18 @@
 								minlength="5" maxlength="5" required>
 						</label>			
 				</fieldset>
-				<button role="button" type="submit">Go!</button>
+				<button role="button" type="submit">Search</button>
 			</form>
 		</div>
 		
 			<div class="vets-results js-vets-results" hidden></div>
 			<div class="pet-stores-results js-pet-stores-results" hidden></div>
- 			<div class="js-popup-window" hidden></div>
+ 			<div class="popup-window js-popup-window" hidden></div>
 		<div id="map" hidden></div>
 	</div>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeqMDyG-nlak99Pbi88_TATn2xc5WQZEE&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzvIv5HDpvcPzKaiyQrY6F8b4yLvIlmbM&callback=initMap">
 </script>
 	<script type="text/javascript" src="index.js"></script>
 </body>

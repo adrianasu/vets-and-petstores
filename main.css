@@ -6,18 +6,38 @@ body {
 
 fieldset {
     border: none;
+    text-align: center;
 }
 
-button {
-    background-color: #4CAF50;
-    border-radius: 10px;
-    color: white;
-    padding: .5em;
- 
+.start button {
+    background-color: white;
+    border-radius: 12px;
+    color: black;
+    padding: 0.5em 1.5em;
     text-decoration: none;
+    border: none;
+    align-items: center;
+    display: block;
+    margin: auto;
 }
 
-img {
+.option {
+    background-color: white;
+    border-radius: 12px;
+    padding: .5em;
+    text-decoration: none;
+    border: 0.5px solid lightgray;
+}
+
+.vets-results .option:hover, .vets-results .option:focus {
+    border: 1px solid purple;
+}
+
+.pet-stores-results .option:hover, .pet-stores-results .option:focus {
+    border: 1px solid lightcoral;
+}
+
+.popup-window img {
     width: 70px;
 }
 
@@ -27,7 +47,6 @@ img {
     grid-gap: 1em;
     align-items: stretch;
     justify-items: stretch;
-    margin: 10px;
 }
 
 #map {
@@ -39,8 +58,17 @@ img {
 .start {
     grid-column: 1/3;
     grid-row: 1/2;
-    padding: 0.2em 1em;
     margin: auto;
+    background-color: beige;
+    width: 100%;
+    padding: 2em 0;
+    font-size: 1.2em;
+}
+
+.zip-code {
+    padding: 1em;
+    border-bottom: 1px solid lightseagreen;
+    border-radius: 12px;
 }
 
 .pet-stores-results, .vets-results {
@@ -60,6 +88,12 @@ img {
     border-radius: 10px;
     grid-column: 2/3;
 }
+
+/* .popup-window {
+    grid-column: 1.5/2.5;
+    grid-row: 2/6;
+
+} */
 
 /* #map {
     height: 500px;
