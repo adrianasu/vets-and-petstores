@@ -8,6 +8,8 @@ let storesData;
 let zipcode;
 let vetsCoordinates =[];
 let storesCoordinates = [];
+let vetsMarkers = [];
+let storesMarkers = [];
 
 function initMap(coordinates) {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -54,16 +56,20 @@ function drawMarkers(data, locations, labels) {
             },
         });
     });
+
+    if (labels == "12345") {
+        storesMarkers = markers;
+    }
+    else {
+        vetsMarkers = markers;
+    }
 }
 
-function deleteMarkers(locations) {     
-    let markers = locations.map(function (location, i) {
-        return new google.maps.Marker({
-            position: location,
-            map: null 
-        });
-        });
-    return locations;
+function deleteMarkers(markers) {     
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    return markers;
 }
 
 
@@ -131,13 +137,15 @@ function generateObjectWithCoordinates(data, item) {
 function displayVetsResults(data, page) {
     vetsData = data;
     let vetsString = [];
-    //let vetsCoordinates = [];
     let labels = 'ABCDE';
     vetsString.push(`<h2>Vets</h2>`);
     if (!vetsData || !vetsData.businesses || !vetsData.businesses.length) {
         vetsString.push(`<p>No Results</p>`);
+        vetsString.join("");
+        $('.js-vets-results').html(vetsString);
         return data;
     }
+    vetsString.push(`<p>5 results out of ${data.total}</p>`);
     for (let i = 0; i < vetsData.businesses.length; i++) {
         vetsString.push(generateButtonString(vetsData, i, labels));
         vetsCoordinates.push(generateObjectWithCoordinates(vetsData, i));
@@ -193,8 +201,11 @@ function displayPetStoresResults(data, page) {
     storesString.push(`<h2>Pet Stores</h2>`);
     if (!storesData || !storesData.businesses || !storesData.businesses.length) {
         storesString.push(`<p>No Results</p>`);
+        storesString.join("");
+        $('.js-pet-stores-results').html(storesString);
         return data;
     }
+    storesString.push(`<p>5 results out of ${data.total}</p>`);
     for (let i = 0; i < storesData.businesses.length; i++) {
         storesString.push(generateButtonString(storesData, i, labels));
         storesCoordinates.push(generateObjectWithCoordinates(storesData, i));
@@ -230,7 +241,7 @@ function handleNextPrevButton(event) {
     let page = parseInt($(event.currentTarget).attr('data-page'));
     let term = $(event.currentTarget).attr('data-term');
     if (term === "vets") {
-        deleteMarkers(vetsCoordinates);
+        deleteMarkers(vetsMarkers);
         vetsCoordinates = [];
                 return getVetData(zipcode, page)
         .then(vets => {
@@ -245,7 +256,7 @@ function handleNextPrevButton(event) {
                 
     }
     else {
-        deleteMarkers(storesCoordinates);
+        deleteMarkers(storesMarkers);
         storesCoordinates = [];
                 return getPetStoreData(zipcode, page)
             .then(petStores => {
@@ -277,17 +288,14 @@ function handleSearch(event) {
             return getVetData(zipcode, vetsPage)
                 .then(vets => {
                     vetsData = vets;
-                    if (vets.businesses.length || petStores.businesses.length) {
-                        //if code reaches here, both requests have been succesful
+                    displayPetStoresResults(storesData, storesPage);
+                    displayVetsResults(vetsData, vetsPage);
+                    if (vetsData.businesses.length || storesData.businesses.length) {
                         setCenterOfMap(vets, petStores);
-                        displayPetStoresResults(petStores, storesPage);
-                        displayVetsResults(vets, vetsPage);
                         $('.js-vets-results, .js-pet-stores-results, #map').show();
-                    } else {
-                        displayPetStoresResults(petStores, storesPage);
-                        displayVetsResults(vets, vetsPage);
+                    } 
+                    else {
                         $('.js-vets-results, .js-pet-stores-results').show();
-                        $('#map').hide();
                     }
 
 
