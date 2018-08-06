@@ -40,7 +40,7 @@ function initMap(coordinates) {
 
 function drawMarkers(data, locations, labels) {
     let color = (labels == "12345") ? "orangered" : "purple";
-    
+  
     let markers = locations.map(function (location, i) {
         return new google.maps.Marker({
             position: location,
@@ -140,10 +140,11 @@ function displayVetsResults(data, page) {
     let labels = 'ABCDE';
     vetsString.push(`<h2>Vets</h2>`);
     if (!vetsData || !vetsData.businesses || !vetsData.businesses.length) {
-        vetsString.push(`<p>No Results</p>`);
+        vetsString.push(`<p>Sorry, no results</p>`);
         vetsString.join("");
         $('.js-vets-results').html(vetsString);
         return data;
+
     }
     vetsString.push(`<p>5 results out of ${data.total}</p>`);
     for (let i = 0; i < vetsData.businesses.length; i++) {
@@ -162,7 +163,6 @@ function setCenterOfMap(coordinateOrFirstResults, secondResults) {
     let allLong = [];
     let allLat = [];
 
-
     if (arguments.length === 2) {
         for (let i = 0; i < coordinateOrFirstResults.businesses.length; i++) {
             allLong.push(coordinateOrFirstResults.businesses[i].coordinates.longitude);
@@ -175,8 +175,8 @@ function setCenterOfMap(coordinateOrFirstResults, secondResults) {
         allLong.sort();
         allLat.sort();
      
-        let averageLong = allLong[0] + (Math.abs(allLong[allLong.length - 1]) - Math.abs(allLong[0])) / 2;
-        let averageLat = allLat[0] + (Math.abs(allLat[allLat.length - 1]) - Math.abs(allLat[0])) / 2;
+        let averageLong = allLong[0] + (allLong[allLong.length - 1] - allLong[0]) / 2;
+        let averageLat = allLat[0] + (allLat[allLat.length - 1] - allLat[0]) / 2;
         coordinate = {
             lng: averageLong,
             lat: averageLat
@@ -196,11 +196,10 @@ function generateNextPrevButtons(term, page) {
 function displayPetStoresResults(data, page) {
     storesData = data;
     let storesString = [];
-    //let storesCoordinates = [];
     let labels = '12345';
     storesString.push(`<h2>Pet Stores</h2>`);
     if (!storesData || !storesData.businesses || !storesData.businesses.length) {
-        storesString.push(`<p>No Results</p>`);
+        storesString.push(`<p>Sorry, no results</p>`);
         storesString.join("");
         $('.js-pet-stores-results').html(storesString);
         return data;
@@ -252,8 +251,7 @@ function handleNextPrevButton(event) {
                             setCenterOfMap(vetsData, storesData);
                             displayVetsResults(vetsData, page);
                         }
-                    });
-                
+                    });       
     }
     else {
         deleteMarkers(storesMarkers);
@@ -268,7 +266,6 @@ function handleNextPrevButton(event) {
                         displayPetStoresResults(storesData, page);
                     }
                 });
-    
     }
 }
 
@@ -277,6 +274,9 @@ function handleSearch(event) {
     $('.js-vets-results, .js-pet-stores-results, #map').hide();
     vetsData = {};
     storesData = {};
+    vetsCoordinates = [];
+    storesCoordinates = [];
+    zipcode = 0;
     let zipcodeInput = $('#zip-code');
     zipcode = zipcodeInput.val();
     zipcodeInput.val("");
