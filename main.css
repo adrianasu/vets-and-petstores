@@ -17,8 +17,10 @@ fieldset {
     text-decoration: none;
     border: none;
     align-items: center;
-    display: block;
+    /* display: block; */
     margin: auto;
+    cursor: pointer;
+    box-shadow: 0 2px lightgrey;
 }
 
 .option {
@@ -37,7 +39,7 @@ fieldset {
     border: 1px solid lightcoral;
 }
 
-.popup-window img {
+.info-window img {
     width: 70px;
 }
 
@@ -67,8 +69,10 @@ fieldset {
 
 .zip-code {
     padding: 1em;
-    border-bottom: 1px solid lightseagreen;
+    border: none;
     border-radius: 12px;
+    cursor: pointer;
+    outline: none;
 }
 
 .pet-stores-results, .vets-results {
@@ -89,11 +93,46 @@ fieldset {
     grid-column: 2/3;
 }
 
-/* .popup-window {
-    grid-column: 1.5/2.5;
-    grid-row: 2/6;
+.show-it {
+    display: block;
+}
 
-} */
+.hide-it {
+    display: none;
+}
+
+.info-window {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.biz-info {
+    background-color: lightgoldenrodyellow;
+    margin: 1em auto;
+    padding: 1em;
+    border: 1px solid whitesmoke;
+    border-radius: 12px;
+    width: 80%;
+}
+
+.close {
+    color: darkslategray;
+    float: right;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /* #map {
     height: 500px;

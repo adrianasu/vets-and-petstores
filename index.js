@@ -119,10 +119,12 @@ function generateBizInfoString(selected) {
         data = vetsData;
         item = label.indexOf(selected.charAt(6));
     }
-    return `<h2>${data.businesses[item].name}</h2>
-                    <p>${data.businesses[item].location.display_address[0]}</p>
-                    <p>${data.businesses[item].display_phone}</p>
-                    <img src="${data.businesses[item].image_url}">`;
+    return `<div class="biz-info"><span class="close js-close">&times;</span>
+            <h2>${data.businesses[item].name}</h2>
+            <img src = "${data.businesses[item].image_url}">
+            <p>${data.businesses[item].location.display_address[0]}</p>
+            <p>${data.businesses[item].display_phone}</p>
+            </div>`;
 }
 
 
@@ -221,7 +223,7 @@ function handleErrors(xhr, status, error) {
 }
 
 function displayPopUpWithInfo(selected) {
-    $('.js-popup-window').html(generateBizInfoString(selected)).show();
+    $('.js-info-window').html(generateBizInfoString(selected)).removeClass("hide-it").addClass("show-it");
 }
 
 function handleOptions(event) {
@@ -230,8 +232,14 @@ function handleOptions(event) {
     displayPopUpWithInfo(selected);
 }
 
+function handleWindow() {
+    $('.js-info-window').addClass("hide-it").removeClass("open");
+}
+
 function watchOptions() {
     $('.js-vets-results, .js-pet-stores-results').on('click', '.js-option', handleOptions);
+    $('.js-info-window').on('click', '.js-close', handleWindow);
+    $(window).on('click', handleWindow);
     $('.js-vets-results, .js-pet-stores-results').on('click', '.js-prev, .js-next', handleNextPrevButton);
  }
 
@@ -245,7 +253,6 @@ function handleNextPrevButton(event) {
                 return getVetData(zipcode, page)
         .then(vets => {
             vetsData = vets;
-                        console.log(vetsData);
                         if (vetsData.businesses.length || storesData.businesses.length) {
                             //if code reaches here, both requests have been succesful
                             setCenterOfMap(vetsData, storesData);
@@ -259,7 +266,6 @@ function handleNextPrevButton(event) {
                 return getPetStoreData(zipcode, page)
             .then(petStores => {
                 storesData = petStores;
-                    console.log(storesData);
                     if (vetsData.businesses.length || storesData.businesses.length) {
                         //if code reaches here, both requests have been succesful
                         setCenterOfMap(vetsData, storesData);
