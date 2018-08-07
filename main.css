@@ -13,6 +13,14 @@ fieldset {
     text-align: center;
 }
 
+.to-top {
+    margin-top: 0;
+}
+
+.to-middle {
+    margin-top: 3em;
+}
+
 .start button, .next-prev {
     background-color: white;
     border-radius: 12px;
@@ -61,7 +69,7 @@ fieldset {
 
 .option {
     background-color: white;
-    border-radius: 2px;
+    border-radius: 5px;
     padding: .35em;
     text-decoration: none;
     border: none;
@@ -83,12 +91,12 @@ fieldset {
 }
 
 .start img {
-    max-width: 80%;
-    margin: 2em 2em 10em 2em;  
+    max-width: 50%;
+    display: block;
+    margin: 2em auto 20em auto;
 }
 
 .info-window img {
-    /* width: 70px; */
     max-width: 10em;
 }
 
@@ -143,11 +151,10 @@ fieldset {
     grid-row: 1/2;
     grid-column: 2/3;
     text-align: right;
-    margin-right: 1em;
+    margin-right: 2.5em;
 }
 
 .nested .button-wrapper {
-    /* grid-row: 3/4; */
     grid-column: 1/3;
     margin: auto;
 }
@@ -188,13 +195,13 @@ fieldset {
 }
 
 .biz-info {
-    background-color: lightgoldenrodyellow;
+    background-color: whitesmoke;
     margin: 1em auto;
     padding: 1em;
     border: 1px solid whitesmoke;
     border-radius: 10px;
     text-align: center;
-    width: 90%;
+    max-width: 90%;
 }
 
 .close {
@@ -210,29 +217,46 @@ fieldset {
     cursor: pointer;
 }
 
-/* #map {
-    height: 500px;
-    grid-column: 1/2;
-    grid-row: 2/6;
+/* 
+  */
+
+@media only screen and (orientation: landscape) {
+    .wrapper {
+        grid-template-rows: 20% 40% 40%;
+        grid-template-columns: 40% 60%;
+    }
+    #map {
+        height: 315px;
+        grid-row: 2/4;
+        grid-column: 2/3
+    }
+    .start {
+        grid-row: 1/2;
+        grid-column: 1/3;
+        width: 100%;
+        padding: 1em 0;
+        font-size: 1.5em;
+    }
+    .pet-stores-results {
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+    .vets-results {
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+    .start img {
+        max-width: 20%;
+        margin: 2em auto 20em auto;
+    }
+    .info-window {
+        max-width: 100%;
+        height: 60%;
+    }
 }
 
-.start {
-    grid-column: 1/3;
-    grid-row: 1/2;
+@media only screen and (min-device-width: 700px) {
+    #map {
+        height: 450px;
+    }
 }
-
-.pet-stores-results, .vets-results {
-    grid-column: 2/3;
-}
-
-.pet-stores-results {
-    border: 3px solid orangered;
-    border-radius: 10px;
-    grid-row: 2/4;
-}
-
-.vets-results {
-    border: 3px solid purple;
-    border-radius: 10px;
-    grid-row: 4/6;
-} */

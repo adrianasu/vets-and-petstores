@@ -278,9 +278,12 @@ function handleSearch(event) {
                     if (vetsData.businesses.length || storesData.businesses.length) {
                         setCenterOfMap(vets, petStores);
                         $('.js-start img').addClass('hide-it');
+                        $('.js-start').addClass('to-top').removeClass('to-middle');
                         $('.js-vets-results, .js-pet-stores-results, #map').show();
                     } 
                     else {
+                        $('.js-start img').addClass('hide-it');
+                        $('.js-start').addClass('to-top').removeClass('to-middle');
                         $('.js-vets-results, .js-pet-stores-results').show();
                     }
                 });
