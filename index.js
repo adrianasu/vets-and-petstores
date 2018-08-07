@@ -16,30 +16,10 @@ function initMap(coordinates) {
         center: coordinates,
         zoom: 11
     });
-    //drawMarkers(locations, labels);
 }
 
-// function generateInfoWindowOnMap(contentString) {
-//     var infowindow = new google.maps.InfoWindow({
-//         content: contentString,
-//         maxWidth: 200
-//     });
-// }
-
-// function generateMarkerInfo(coordinates) {
-//     var marker = new google.maps.Marker({
-//         position: coordinates,
-//         map: map,
-//         title: 'data.businesses[item].name'
-//     });
-   
-//     marker.addListener('click', function () {
-//         infowindow.open(map, marker);
-//     });
-// }
-
 function drawMarkers(data, locations, labels) {
-    let color = (labels == "12345") ? "orangered" : "purple";
+    let color = (labels == "1234") ? "orangered" : "purple";
   
     let markers = locations.map(function (location, i) {
         return new google.maps.Marker({
@@ -57,7 +37,7 @@ function drawMarkers(data, locations, labels) {
         });
     });
 
-    if (labels == "12345") {
+    if (labels == "1234") {
         storesMarkers = markers;
     }
     else {
@@ -83,8 +63,8 @@ function getDataFromYelp(searchTerm, zipcode, callback, page) {
             term: searchTerm,
             location: zipcode,
             radius: 24140,
-            limit: 5,
-            offset: page * 5,
+            limit: 4,
+            offset: page * 4,
         },
         type: "GET",
         dataType: "json",
@@ -92,13 +72,11 @@ function getDataFromYelp(searchTerm, zipcode, callback, page) {
         fail: handleErrors,
     };
     return $.ajax(settings);
-
 }
 
 function getVetData(zipcode, page, callback) {
     let term = "veterinarians";
     return getDataFromYelp(term, zipcode, callback, page);
-
 }
 
 function getPetStoreData(zipcode, page, callback) {
@@ -112,7 +90,7 @@ function generateButtonString(data, item, labels) {
 }
 
 function generateBizInfoString(selected) {
-    let label = "ABCDE";
+    let label = "ABCD";
     let data = storesData;
     let item = selected.charAt(6) - 1;
     if (label.indexOf(selected.charAt(6)) >= 0) {
@@ -139,7 +117,7 @@ function generateObjectWithCoordinates(data, item) {
 function displayVetsResults(data, page) {
     vetsData = data;
     let vetsString = [];
-    let labels = 'ABCDE';
+    let labels = 'ABCD';
     vetsString.push(`<h2>Vets</h2>`);
     if (!vetsData || !vetsData.businesses || !vetsData.businesses.length) {
         vetsString.push(`<p>Sorry, no results</p>`);
@@ -148,11 +126,12 @@ function displayVetsResults(data, page) {
         return data;
 
     }
-    vetsString.push(`<p>5 results out of ${data.total}</p>`);
+    vetsString.push(`<p>4 results out of ${data.total}</p><div class="options-wrapper">`);
     for (let i = 0; i < vetsData.businesses.length; i++) {
         vetsString.push(generateButtonString(vetsData, i, labels));
         vetsCoordinates.push(generateObjectWithCoordinates(vetsData, i));
     }
+    vetsString.push(`</div>`);
     vetsString.push(generateNextPrevButtons("vets", page));
     vetsString.join("");
     $('.js-vets-results').html(vetsString);
@@ -176,7 +155,6 @@ function setCenterOfMap(coordinateOrFirstResults, secondResults) {
         }
         allLong.sort();
         allLat.sort();
-     
         let averageLong = allLong[0] + (allLong[allLong.length - 1] - allLong[0]) / 2;
         let averageLat = allLat[0] + (allLat[allLat.length - 1] - allLat[0]) / 2;
         coordinate = {
@@ -191,14 +169,14 @@ function setCenterOfMap(coordinateOrFirstResults, secondResults) {
 
 function generateNextPrevButtons(term, page) {
     let prevPage = (page !== 0) ? page-1 : 0;
-    return `<button role="button" type="button" data-page="${prevPage}" data-term="${term}" class="next-prev js-prev">Prev</button>
-            <button role="button" type="button" data-page="${page+1}" data-term="${term}" class="next-prev js-next">Next</button>`;
+    return `<div class="button-wrapper"><button role="button" type="button" data-page="${prevPage}" data-term="${term}" class="next-prev js-prev">Prev</button>
+            <button role="button" type="button" data-page="${page+1}" data-term="${term}" class="next-prev js-next">Next</button></div>`;
 }
 
 function displayPetStoresResults(data, page) {
     storesData = data;
     let storesString = [];
-    let labels = '12345';
+    let labels = '1234';
     storesString.push(`<h2>Pet Stores</h2>`);
     if (!storesData || !storesData.businesses || !storesData.businesses.length) {
         storesString.push(`<p>Sorry, no results</p>`);
@@ -206,11 +184,12 @@ function displayPetStoresResults(data, page) {
         $('.js-pet-stores-results').html(storesString);
         return data;
     }
-    storesString.push(`<p>5 results out of ${data.total}</p>`);
+    storesString.push(`<p>5 results out of ${data.total}</p><div class="options-wrapper">`);
     for (let i = 0; i < storesData.businesses.length; i++) {
         storesString.push(generateButtonString(storesData, i, labels));
         storesCoordinates.push(generateObjectWithCoordinates(storesData, i));
     }
+    storesString.push(`</div>`);
     storesString.push(generateNextPrevButtons("stores", page));
     storesString.join("");
     $('.js-pet-stores-results').html(storesString);
@@ -232,14 +211,14 @@ function handleOptions(event) {
     displayPopUpWithInfo(selected);
 }
 
-function handleWindow() {
+function hidePopupWindow() {
     $('.js-info-window').addClass("hide-it").removeClass("open");
 }
 
 function watchOptions() {
     $('.js-vets-results, .js-pet-stores-results').on('click', '.js-option', handleOptions);
-    $('.js-info-window').on('click', '.js-close', handleWindow);
-    $(window).on('click', handleWindow);
+    $('.js-info-window').on('click', '.js-close', hidePopupWindow);
+    $(window).on('click', hidePopupWindow);
     $('.js-vets-results, .js-pet-stores-results').on('click', '.js-prev, .js-next', handleNextPrevButton);
  }
 
@@ -303,16 +282,12 @@ function handleSearch(event) {
                     else {
                         $('.js-vets-results, .js-pet-stores-results').show();
                     }
-
-
                 });
         });
-
 }
 
 function watchSubmitButton() {
     $('.js-form').on('submit', handleSearch);
-
 }
 
 function main() {
