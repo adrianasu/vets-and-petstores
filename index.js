@@ -76,12 +76,23 @@ function getDataFromYelp(searchTerm, zipcode, callback, page) {
 
 function getVetData(zipcode, page, callback) {
     let term = "veterinarians";
-    return getDataFromYelp(term, zipcode, callback, page);
+   
+    return getDataFromYelp(term, zipcode, callback, page)
+        .catch(handleYelpError);
+}
+
+function handleYelpError(xhr) {
+    let message = "Something went wrong, please try again";
+        if (xhr && xhr.responseJSON && xhr.responseJSON.error && xhr.responseJSON.error.description) {
+            message = xhr.responseJSON.error.description;
+        }
+        $('.js-errors>p').html(message);
 }
 
 function getPetStoreData(zipcode, page, callback) {
     let term = "pet stores";
-    return getDataFromYelp(term, zipcode, callback, page);
+    return getDataFromYelp(term, zipcode, callback, page)
+        .catch (handleYelpError);
 }
 
 function generateButtonString(data, item, labels) {
@@ -195,10 +206,6 @@ function displayPetStoresResults(data, page) {
     $('.js-pet-stores-results').html(storesString);
     drawMarkers(storesData, storesCoordinates, labels);
     return data;
-}
-
-function handleErrors(xhr, status, error) {
-    console.log('error ' + error);
 }
 
 function displayPopUpWithInfo(selected) {

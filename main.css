@@ -14,11 +14,11 @@ fieldset {
 }
 
 .to-top {
-    margin-top: 0;
+    padding-top: 0;
 }
 
 .to-middle {
-    margin-top: 3em;
+    padding-top: 3em;
 }
 
 .start button, .next-prev {
@@ -121,6 +121,14 @@ fieldset {
     color: white;
 }
 
+.errors {
+    text-decoration: underline;
+    text-align: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .zip-code {
     padding: 1em;
     border: 8px solid white;
@@ -180,7 +188,7 @@ fieldset {
 }
 
 .hide-it {
-    display: none;
+    display: none !important;
 }
 
 .info-window {
@@ -191,7 +199,7 @@ fieldset {
     max-width: 80%;
     height: 40%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    /* background-color: rgba(0, 0, 0, 0.4); */
 }
 
 .biz-info {
