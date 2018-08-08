@@ -8,6 +8,11 @@
 	<title>Vets and Pet Stores</title>
 	<!-- Normalize.css, a cross-browser reset file -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bowlby+One|Quicksand" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Archivo+Black|Palanquin+Dark" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nobile:700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
 	<link rel="stylesheet" href="main.css">
 	<script
   src="https://code.jquery.com/jquery-3.3.1.js"
@@ -16,21 +21,24 @@
 </head>
 <body>
 	<div class="wrapper">
-		<header role="banner" class="start js-start to-middle"> 
+		<header role="banner" class="start js-start big"> 
 			<form class="js-form">
 				<fieldset name="pet-search">
-					<legend>Looking for a vet or pet store?</legend>
+					<legend>Find a Vet or Pet Store</legend>
 						<label for="zip-code">Zip Code
 							<input type="text" id="zip-code" size="5" 
 								minlength="5" maxlength="5" required>
 						</label>			
 				</fieldset>
-				<button role="button" type="submit">Search</button>
+				<button role="button" type="submit" class="position-search-button">Search</button>
+				<div class="js-start-loader loader start-loader" hidden></div>
 			</form>
-			<div class="js-errors errors"><p></p></div>
-			<img src="https://vignette.wikia.nocookie.net/scribblenauts/images/7/70/Pet_Store.png/revision/latest?cb=20130227212519"
-			 alt="pet shop front cartoon">
+			
+			
+			<img src="https://cdn.onlinewebfonts.com/svg/img_568626.png"
+				 alt="dog paw cartoon">
 		</header>
+		<div class="js-errors errors"><p></p></div>
 		<div class="vets-results nested js-vets-results" hidden></div>
 		<div class="pet-stores-results nested js-pet-stores-results" hidden></div>
 		<div id="map" hidden></div>

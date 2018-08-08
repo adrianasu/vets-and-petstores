@@ -68,15 +68,13 @@ function getDataFromYelp(searchTerm, zipcode, callback, page) {
         },
         type: "GET",
         dataType: "json",
-        success: callback,
-        fail: handleErrors,
+        success: callback
     };
     return $.ajax(settings);
 }
 
 function getVetData(zipcode, page, callback) {
     let term = "veterinarians";
-   
     return getDataFromYelp(term, zipcode, callback, page)
         .catch(handleYelpError);
 }
@@ -86,13 +84,15 @@ function handleYelpError(xhr) {
         if (xhr && xhr.responseJSON && xhr.responseJSON.error && xhr.responseJSON.error.description) {
             message = xhr.responseJSON.error.description;
         }
-        $('.js-errors>p').html(message);
+        showAndHideElements();
+        $('js-start-loader').hide();
+        $('.js-errors>p').html(message).show();
 }
 
 function getPetStoreData(zipcode, page, callback) {
     let term = "pet stores";
     return getDataFromYelp(term, zipcode, callback, page)
-        .catch (handleYelpError);
+        .catch(handleYelpError);
 }
 
 function generateButtonString(data, item, labels) {
@@ -123,7 +123,6 @@ function generateObjectWithCoordinates(data, item) {
     coordinates.lat = data.businesses[item].coordinates.latitude;
     return coordinates;
 }
-
 
 function displayVetsResults(data, page) {
     vetsData = data;
@@ -180,8 +179,9 @@ function setCenterOfMap(coordinateOrFirstResults, secondResults) {
 
 function generateNextPrevButtons(term, page) {
     let prevPage = (page !== 0) ? page-1 : 0;
-    return `<div class="button-wrapper"><button role="button" type="button" data-page="${prevPage}" data-term="${term}" class="next-prev js-prev">Prev</button>
-            <button role="button" type="button" data-page="${page+1}" data-term="${term}" class="next-prev js-next">Next</button></div>`;
+    return `<div class="js-button-wrapper button-wrapper"><button role="button" type="button" data-page="${prevPage}" data-term="${term}" class="next-prev js-prev">Prev</button>
+            <button role="button" type="button" data-page="${page + 1}" data-term="${term}" class="next-prev js-next">Next</button>
+            </div><div class="js-${term}-loader loader button-wrapper" hidden></div>`;
 }
 
 function displayPetStoresResults(data, page) {
@@ -234,6 +234,8 @@ function handleNextPrevButton(event) {
     let page = parseInt($(event.currentTarget).attr('data-page'));
     let term = $(event.currentTarget).attr('data-term');
     if (term === "vets") {
+        $('.js-button-wrapper').hide();
+        $('.js-vets-loader').show();
         deleteMarkers(vetsMarkers);
         vetsCoordinates = [];
                 return getVetData(zipcode, page)
@@ -243,10 +245,14 @@ function handleNextPrevButton(event) {
                             //if code reaches here, both requests have been succesful
                             setCenterOfMap(vetsData, storesData);
                             displayVetsResults(vetsData, page);
+                            $('.js-vets-loader').hide();
+                            $('.js-button-wrapper').show();
                         }
                     });       
     }
     else {
+        $('.js-button-wrapper').hide();
+        $('.js-stores-loader').show();
         deleteMarkers(storesMarkers);
         storesCoordinates = [];
                 return getPetStoreData(zipcode, page)
@@ -256,14 +262,27 @@ function handleNextPrevButton(event) {
                         //if code reaches here, both requests have been succesful
                         setCenterOfMap(vetsData, storesData);
                         displayPetStoresResults(storesData, page);
+                        $('.js-stores-loader').hide();
+                        $('.js-button-wrapper').show();
                     }
                 });
+        
     }
+  
+}
+
+function showAndHideElements() {
+    $('.js-start img, legend').hide();
+    $('.js-start fieldset').addClass('to-left');
+    $('.js-start').addClass('to-top, small').removeClass('to-middle, big');
+    $('.js-start button').show();
 }
 
 function handleSearch(event) {
     event.preventDefault();
-    $('.js-vets-results, .js-pet-stores-results, #map').hide();
+    $('.js-vets-results, .js-pet-stores-results, #map, .js-errors>p, .js-start button').hide();
+    $('.js-start fieldset').addClass('clear');
+    $('.js-start-loader').show();
     vetsData = {};
     storesData = {};
     vetsCoordinates = [];
@@ -284,17 +303,19 @@ function handleSearch(event) {
                     displayVetsResults(vetsData, vetsPage);
                     if (vetsData.businesses.length || storesData.businesses.length) {
                         setCenterOfMap(vets, petStores);
-                        $('.js-start img').addClass('hide-it');
-                        $('.js-start').addClass('to-top').removeClass('to-middle');
-                        $('.js-vets-results, .js-pet-stores-results, #map').show();
+                        showAndHideElements();
+                        $('.js-start-loader').hide();
+                        $('.js-vets-results, .js-pet-stores-results, .js-start button, #map').show();
                     } 
                     else {
-                        $('.js-start img').addClass('hide-it');
-                        $('.js-start').addClass('to-top').removeClass('to-middle');
-                        $('.js-vets-results, .js-pet-stores-results').show();
+                        showAndHideElements();
+                        $('.js-start-loader').hide();
+                        $('.js-vets-results, .js-pet-stores-results, .js-start button').show();
+
                     }
                 });
-        });
+                    });
+    
 }
 
 function watchSubmitButton() {
