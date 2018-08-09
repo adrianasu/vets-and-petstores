@@ -85,7 +85,7 @@ function handleYelpError(xhr) {
             message = xhr.responseJSON.error.description;
         }
         showAndHideElements();
-        $('js-start-loader').hide();
+        $('.js-start-loader').hide();
         $('.js-errors>p').html(message).show();
 }
 

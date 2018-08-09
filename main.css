@@ -1,5 +1,8 @@
-body {
+* {
     box-sizing: border-box;
+}
+
+body {
     font-size: 0.7em;
     font-family: 'Chivo', sans-serif;
 }
@@ -30,7 +33,6 @@ fieldset {
     font-weight: bold;
     font-size: 1.05em;
     letter-spacing: 0.05em;
-    border: none;
     align-items: center;
     /* margin: .5em auto; */
     cursor: pointer;
@@ -43,6 +45,7 @@ fieldset {
 .start button {
     box-shadow: 2px 6px #00112b;
     grid-row: 4/5;
+    border: 1px solid #00112b;
 }
 
 .next-prev {
@@ -72,15 +75,14 @@ fieldset {
 
 .big label {
     display: block;
-    
     grid-row: 2/3;
 }
 
 .start button {
     color: #00112b;
-    padding: 0.1em .5em;
+    padding: 0em .4em;
     display: block;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .vets-results .next-prev {
@@ -117,10 +119,10 @@ fieldset {
 }
 
 .start img {
-    max-width: 20%;
+    max-width: 90%;
     display: block;
-    margin: 1em auto 7em auto;
-    background-color: #108fd3;
+    margin: auto;
+    /* background-color: #108fd3; */
     grid-row: 5/6;
 }
 
@@ -132,7 +134,7 @@ fieldset {
     display: grid;
     grid-template-rows: 14% 18% 18% auto;
     grid-template-columns: 100%;
-    grid-gap: 0.2em;
+    /* grid-gap: 0.2em; */
 }
 
 #map {
@@ -142,7 +144,8 @@ fieldset {
 
 .start {
     grid-row: 1/2;
-    background-color: #108fd3;
+    /* background-color: #108fd3; */
+    background-color: white;
     width: 100%;
     font-size: 1.5em;
     color: #00112b;
@@ -153,6 +156,7 @@ fieldset {
 .start-wrapper {
     display: grid;
     grid-template-rows: 35% 17% 18% 15% 15%;
+    grid-template-columns: 100%;
 }
 
 legend {
@@ -160,7 +164,7 @@ legend {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     background-color: #00112b;
-    padding: .8em 1em;
+    padding: .5em 1em;
     width: 100%;
     margin-bottom: .5em;
     grid-row: 1/2;
@@ -177,7 +181,7 @@ legend {
 }
 
 .big {
-    font-size: 3.2em;
+    font-size: 3em;
     line-height: 1.8em;
 }
 
@@ -206,11 +210,12 @@ legend {
     padding-left: 1em;
     padding-right: 1em;
     border: 1px solid #00112b;
-    border-radius: 12px;
+    /* border-radius: 12px; */
     cursor: pointer;
     outline: none;
     box-shadow: none;
     grid-row: 3/4;
+    grid-column: 1/2;
 }
 
 .pet-stores-results, .vets-results {
@@ -328,7 +333,7 @@ legend {
     top: 45%;
     left: 38%;
     margin: 0.5em auto 0 auto; */
-    margin: auto;
+    margin: .5em auto;
     border: 20px solid #f9f920;
     border-top: 20px solid white;
     border-radius: 50%;
@@ -356,11 +361,9 @@ legend {
     }
 }
 
-/* 
-  */
-
 @media only screen and (orientation: landscape) {
     .wrapper {
+        display:grid;
         grid-template-rows: 20% 40% 40%;
         grid-template-columns: 40% 60%;
     }
@@ -374,12 +377,10 @@ legend {
         grid-column: 2/3
     }
     .start {
-        grid-row: 1/2;
-        grid-column: 1/3;
+        /* grid-row: 1/2;
+        grid-column: 1/3; */
         width: 100%;
-        padding-top: .3em;
-        padding-bottom: .3em;
-        font-size: 2em;
+        font-size: 2.8em;
     }
     .small label {
         margin-left: 6em;
@@ -392,11 +393,6 @@ legend {
         grid-column: 1/2;
         grid-row: 2/3;
     }
-    .start img {
-        max-width: 20%;
-        margin: 2em auto 20em auto;
-        /* grid-row: 6/7; */
-    }
     .info-window {
         max-width: 100%;
         height: 60%;
@@ -406,6 +402,33 @@ legend {
     }
     .loader {
         top: 0;
+    }
+    .start-wrapper {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 35% 25% 25% 15%;
+    }
+    legend {
+        grid-row: 1/2;
+        grid-column: 1/3;
+    }
+    .big label {
+        grid-row: 2/3;
+        grid-column: 2/3;
+    }
+    #zip-code {
+        grid-row: 3/4;
+        grid-column: 2/3;
+    }
+    .start button {
+        grid-row: 4/5;
+        grid-column: 2/3;
+    }
+    .start img {
+        max-width: 50%;
+        margin: auto;
+        grid-row: 2/5;
+        grid-column: 1/2;
     }
 }
 
