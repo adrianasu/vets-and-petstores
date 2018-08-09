@@ -274,7 +274,7 @@ function handleNextPrevButton(event) {
 function showAndHideElements() {
     $('.js-start img, legend').hide();
     $('.js-start fieldset').addClass('to-left');
-    $('.js-start').addClass('to-top, small').removeClass('to-middle, big');
+    $('.js-start').addClass('to-top invert-colors small').removeClass('to-middle big');
     $('.js-start button').show();
 }
 
