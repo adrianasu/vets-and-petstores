@@ -85,7 +85,7 @@ function handleYelpError(xhr) {
             message = xhr.responseJSON.error.description;
         }
         showAndHideElements();
-        $('js-start-loader').hide();
+        $('.js-start-loader').hide();
         $('.js-errors>p').html(message).show();
 }
 
@@ -274,7 +274,7 @@ function handleNextPrevButton(event) {
 function showAndHideElements() {
     $('.js-start img, legend').hide();
     $('.js-start fieldset').addClass('to-left');
-    $('.js-start').addClass('to-top, small').removeClass('to-middle, big');
+    $('.js-start').addClass('to-top invert-colors small').removeClass('to-middle big');
     $('.js-start button').show();
 }
 

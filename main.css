@@ -1,5 +1,8 @@
-body {
+* {
     box-sizing: border-box;
+}
+
+body {
     font-size: 0.7em;
     font-family: 'Chivo', sans-serif;
 }
@@ -23,6 +26,7 @@ fieldset {
     padding-top: 1em;
 }
 
+
 .start button, .next-prev {
     background-color: white;
     border-radius: 30px;
@@ -30,20 +34,20 @@ fieldset {
     font-weight: bold;
     font-size: 1.05em;
     letter-spacing: 0.05em;
-    border: none;
     align-items: center;
-    /* margin: .5em auto; */
     cursor: pointer;
 }
 
 .position-search-button {
-    align-items: center;
-    margin: .5em auto;
+    margin: 1em auto;
 }
+
+
 
 .start button {
     box-shadow: 2px 6px #00112b;
-    /* border-radius: 30px; */
+    grid-row: 4/5;
+    border: 1px solid #00112b;
 }
 
 .next-prev {
@@ -72,15 +76,15 @@ fieldset {
 }
 
 .big label {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    display: block;
+    grid-row: 2/3;
 }
 
 .start button {
     color: #00112b;
-    padding: 0.1em .5em;
+    padding: 0em .4em;
     display: block;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .vets-results .next-prev {
@@ -117,10 +121,10 @@ fieldset {
 }
 
 .start img {
-    max-width: 20%;
+    max-width: 90%;
     display: block;
-    margin: 1em auto 7em auto;
-    background-color: #108fd3;
+    margin: auto;
+    grid-row: 5/6;
 }
 
 .info-window img {
@@ -129,26 +133,33 @@ fieldset {
 
 .wrapper {
     display: grid;
-    grid-template-rows: 14% 18% 18% auto;
+    grid-template-rows: 20% 20% auto;
     grid-template-columns: 100%;
-    grid-gap: 0.2em;
 }
 
 #map {
     height: 25em;
-    grid-row: 4/5;
+    grid-row: 3/4;
 }
 
 .start {
-    grid-row: 1/2;
-    background-color: #108fd3;
+    background-color: white;
     width: 100%;
     font-size: 1.5em;
     color: #00112b;
     font-weight: bold;
     letter-spacing: 0.5px;
-    /* display: grid;
-    grid-template-rows: 30% 10% 20% 20% 10% 10%; */
+}
+
+.start {
+    display: grid;
+    grid-template-rows: 35% 17% 18% 15% 15%;
+    grid-template-columns: 100%;
+}
+
+.invert-colors {
+    background: #00112b;
+    color: white;
 }
 
 legend {
@@ -156,11 +167,10 @@ legend {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     background-color: #00112b;
-    padding: 0.5em 0.6em;
+    padding: .5em 1em;
     width: 100%;
-    margin-bottom: 1.3em;
-    /* grid-row: 1/2; */
-    /* border-radius: 12px; */
+    margin-bottom: .5em;
+    grid-row: 1/2;
 }
 
 .down {
@@ -173,20 +183,26 @@ legend {
 }
 
 .big {
-    font-size: 3.2em;
+    font-size: 3em;
     line-height: 1.8em;
 }
 
+
+
 .small label {
+    display: inline-block;
     margin-left: 1em;
+    margin-top: 1em;
 }
 
 .small button {
     box-shadow: 2px 3px #00112b;
+    margin: auto;
+    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
 .errors {
-    /* text-decoration: underline; */
     text-align: center;
     max-width: 400px;
     margin-left: auto;
@@ -200,27 +216,23 @@ legend {
 #zip-code {
     padding-left: 1em;
     padding-right: 1em;
-    margin-left: .75em;
     border: 1px solid #00112b;
-    border-radius: 12px;
     cursor: pointer;
     outline: none;
     box-shadow: none;
-    /* grid-row: 3/4; */
+    grid-row: 3/4;
 }
 
 .pet-stores-results, .vets-results {
     color: white;
     padding: .3em;
     font-size: 1.2em;
-    /* font-family: 'Chivo', sans-serif; */
     letter-spacing: .05em;
 }
 
 .nested {
     display: grid;
     grid-template-columns: 50% 50%;
-    /* grid-template-rows: 20% 60% 20%; */
 }
 
 .nested h2 {
@@ -246,7 +258,6 @@ legend {
     text-align: right;
     margin-right: 1.4em;
     color: white;
-    /* font-weight: bold; */
 }
 
 .nested .button-wrapper {
@@ -262,20 +273,20 @@ legend {
 
 .pet-stores-results {
     background-color: #f25400;
-    grid-row: 3/4;
+    grid-row: 2/3;
 }
 
 .vets-results {
     background-color: purple;
-    grid-row: 2/3;
-}
-
-.show-it {
-    display: block;
+    grid-row: 1/2;
 }
 
 .hide-it {
     display: none !important;
+}
+
+.show-it {
+    display: block;
 }
 
 .info-window {
@@ -286,7 +297,6 @@ legend {
     width: 60%;
     height: 50%;
     overflow: auto;
-    /* background-color: rgba(0, 0, 0, 0.4); */
 }
 
 .biz-info {
@@ -320,12 +330,9 @@ legend {
 }
 
 .loader {
-    /* position: fixed;
-    top: 45%;
-    left: 38%;
-    margin: 0.5em auto 0 auto; */
+    margin: .5em auto;
     border: 20px solid #f9f920;
-    border-top: 20px solid white;
+    border-top: 20px solid lightgray;
     border-radius: 50%;
     width: 1.6em;
     height: 1.6em;
@@ -350,13 +357,10 @@ legend {
         transform: rotate(360deg);
     }
 }
-
-/* 
-  */
-
 @media only screen and (orientation: landscape) {
     .wrapper {
-        grid-template-rows: 20% 40% 40%;
+        display: grid;
+        grid-template-rows: 50% 50%;
         grid-template-columns: 40% 60%;
     }
     .errors {
@@ -365,16 +369,12 @@ legend {
     }
     #map {
         height: 42em;
-        grid-row: 2/4;
-        grid-column: 2/3
+        grid-row: 1/3;
+        grid-column: 2/3;
     }
     .start {
-        grid-row: 1/2;
-        grid-column: 1/3;
         width: 100%;
-        padding-top: .3em;
-        padding-bottom: .3em;
-        font-size: 2em;
+        font-size: 2.8em;
     }
     .small label {
         margin-left: 6em;
@@ -387,11 +387,6 @@ legend {
         grid-column: 1/2;
         grid-row: 2/3;
     }
-    .start img {
-        max-width: 20%;
-        margin: 2em auto 20em auto;
-        /* grid-row: 6/7; */
-    }
     .info-window {
         max-width: 100%;
         height: 60%;
@@ -401,6 +396,33 @@ legend {
     }
     .loader {
         top: 0;
+    }
+    .start {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 35% 25% 25% 15%;
+    }
+    legend {
+        grid-row: 1/2;
+        grid-column: 1/3;
+    }
+    .big label {
+        grid-row: 2/3;
+        grid-column: 2/3;
+    }
+    #zip-code {
+        grid-row: 3/4;
+        grid-column: 2/3;
+    }
+    .start button {
+        grid-row: 4/5;
+        grid-column: 2/3;
+    }
+    .start img {
+        max-width: 50%;
+        margin: auto;
+        grid-row: 2/5;
+        grid-column: 1/2;
     }
 }
 

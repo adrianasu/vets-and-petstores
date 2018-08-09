@@ -1,0 +1,80 @@
+@media only screen and (orientation: landscape) {
+    .wrapper {
+        display: grid;
+        grid-template-rows: 50% 50%;
+        grid-template-columns: 40% 60%;
+    }
+    .errors {
+        grid-column: 1/3;
+        margin: auto;
+    }
+    #map {
+        height: 42em;
+        grid-row: 1/3;
+        grid-column: 2/3;
+    }
+    .start {
+        width: 100%;
+        font-size: 2.8em;
+    }
+    .small label {
+        margin-left: 6em;
+    }
+    .pet-stores-results {
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+    .vets-results {
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+    .info-window {
+        max-width: 100%;
+        height: 60%;
+    }
+    .nested p {
+        margin-right: .6em;
+    }
+    .loader {
+        top: 0;
+    }
+    .start {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 35% 25% 25% 15%;
+    }
+    legend {
+        grid-row: 1/2;
+        grid-column: 1/3;
+    }
+    .big label {
+        grid-row: 2/3;
+        grid-column: 2/3;
+    }
+    #zip-code {
+        grid-row: 3/4;
+        grid-column: 2/3;
+    }
+    .start button {
+        grid-row: 4/5;
+        grid-column: 2/3;
+    }
+    .start img {
+        max-width: 50%;
+        margin: auto;
+        grid-row: 2/5;
+        grid-column: 1/2;
+    }
+}
+
+@media only screen and (min-device-width: 700px) {
+    #map {
+        height: 450px;
+    }
+    .small label {
+        margin-left: 10em;
+    }
+    .biz-info {
+        max-width: 40%;
+    }
+}

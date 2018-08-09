@@ -20,24 +20,22 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
+	
+	<header role="banner" class="start js-start big"> 
+		<form class="js-form">
+			<fieldset name="pet-search">
+				<legend>Find a Vet or Pet Store</legend>
+					<label for="zip-code">Zip Code</label>
+						<input type="text" id="zip-code" size="5" 
+							minlength="5" maxlength="5" required autofocus>	
+			</fieldset>
+			<button role="button" type="submit" class="position-search-button">Search</button>
+			<div class="js-start-loader loader start-loader" hidden></div>
+		</form>
+		<img src="https://veterinarysmallpetcare.files.wordpress.com/2015/05/pets-desktop-background-496176.jpg" 
+			alt="Cats and dogs posing">	 
+	</header>
 	<div class="wrapper">
-		<header role="banner" class="start js-start big"> 
-			<form class="js-form">
-				<fieldset name="pet-search">
-					<legend>Find a Vet or Pet Store</legend>
-						<label for="zip-code">Zip Code
-							<input type="text" id="zip-code" size="5" 
-								minlength="5" maxlength="5" required>
-						</label>			
-				</fieldset>
-				<button role="button" type="submit" class="position-search-button">Search</button>
-				<div class="js-start-loader loader start-loader" hidden></div>
-			</form>
-			
-			
-			<img src="https://cdn.onlinewebfonts.com/svg/img_568626.png"
-				 alt="dog paw cartoon">
-		</header>
 		<div class="js-errors errors"><p></p></div>
 		<div class="vets-results nested js-vets-results" hidden></div>
 		<div class="pet-stores-results nested js-pet-stores-results" hidden></div>
