@@ -37,13 +37,12 @@ fieldset {
 }
 
 .position-search-button {
-    align-items: center;
-    margin: .5em auto;
+    margin: 1em auto;
 }
 
 .start button {
     box-shadow: 2px 6px #00112b;
-    /* border-radius: 30px; */
+    grid-row: 4/5;
 }
 
 .next-prev {
@@ -72,8 +71,9 @@ fieldset {
 }
 
 .big label {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    display: block;
+    
+    grid-row: 2/3;
 }
 
 .start button {
@@ -121,6 +121,7 @@ fieldset {
     display: block;
     margin: 1em auto 7em auto;
     background-color: #108fd3;
+    grid-row: 5/6;
 }
 
 .info-window img {
@@ -147,8 +148,11 @@ fieldset {
     color: #00112b;
     font-weight: bold;
     letter-spacing: 0.5px;
-    /* display: grid;
-    grid-template-rows: 30% 10% 20% 20% 10% 10%; */
+}
+
+.start-wrapper {
+    display: grid;
+    grid-template-rows: 35% 17% 18% 15% 15%;
 }
 
 legend {
@@ -156,10 +160,10 @@ legend {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     background-color: #00112b;
-    padding: 0.5em 0.6em;
+    padding: .8em 1em;
     width: 100%;
-    margin-bottom: 1.3em;
-    /* grid-row: 1/2; */
+    margin-bottom: .5em;
+    grid-row: 1/2;
     /* border-radius: 12px; */
 }
 
@@ -178,6 +182,7 @@ legend {
 }
 
 .small label {
+    display: inline-block;
     margin-left: 1em;
 }
 
@@ -200,13 +205,12 @@ legend {
 #zip-code {
     padding-left: 1em;
     padding-right: 1em;
-    margin-left: .75em;
     border: 1px solid #00112b;
     border-radius: 12px;
     cursor: pointer;
     outline: none;
     box-shadow: none;
-    /* grid-row: 3/4; */
+    grid-row: 3/4;
 }
 
 .pet-stores-results, .vets-results {
@@ -324,6 +328,7 @@ legend {
     top: 45%;
     left: 38%;
     margin: 0.5em auto 0 auto; */
+    margin: auto;
     border: 20px solid #f9f920;
     border-top: 20px solid white;
     border-radius: 50%;
