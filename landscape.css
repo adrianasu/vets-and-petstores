@@ -48,16 +48,17 @@
         top: 0;
     }
 
-    .start {
-        display: grid;
-        grid-template-areas: "legend legend" ".start img, .big label" ".start img, #zip-code" ".start img, .start button"
+    .start-wrapper, 
+    .img-wrapper {
+        width: 50%;
+        float: left;
     }
 
     #zip-code {
         margin: .6em;
     }
     .start img {
-        max-width: 30%;
+        max-width: 60%;
     }
 
     /* legend {

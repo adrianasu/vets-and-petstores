@@ -62,7 +62,7 @@ function getDataFromYelp(searchTerm, zipcode, callback, page) {
         data: {
             term: searchTerm,
             location: zipcode,
-            radius: 24140,
+            radius: 16093,
             limit: 4,
             offset: page * 4,
         },
@@ -108,7 +108,8 @@ function generateBizInfoString(selected) {
         data = vetsData;
         item = label.indexOf(selected.charAt(6));
     }
-    return `<div class="biz-info"><span class="close js-close">&times;</span>
+    return `<div class="biz-info"><button role="button" type="button" 
+                class="close js-close" autofocus>Close</button>
             <h2>${data.businesses[item].name}</h2>
             <img src = "${data.businesses[item].image_url}">
             <p>${data.businesses[item].location.display_address[0]}</p>
@@ -133,6 +134,7 @@ function displayVetsResults(data, page) {
         vetsString.push(`<p>Sorry, no results</p>`);
         vetsString.join("");
         $('.js-vets-results').html(vetsString);
+        $('.js-aria-vets-results').html(`<p>Sorry, no veterinarians found within 10 miles around ${zipcode}.`);
         return data;
 
     }
@@ -146,6 +148,7 @@ function displayVetsResults(data, page) {
     vetsString.join("");
     $('.js-vets-results').html(vetsString);
     drawMarkers(vetsData, vetsCoordinates, labels);
+    $('.js-aria-vets-results').html(`<p>${data.total} veterinarians found.`);
     return data;
 }
 
@@ -193,6 +196,7 @@ function displayPetStoresResults(data, page) {
         storesString.push(`<p>Sorry, no results</p>`);
         storesString.join("");
         $('.js-pet-stores-results').html(storesString);
+        $('.js-aria-stores-results').html(`<p>Sorry, no pet stores found within 10 miles around ${zipcode}.`);
         return data;
     }
     storesString.push(`<p>Total results: ${data.total}</p><div class="options-wrapper">`);
@@ -204,6 +208,7 @@ function displayPetStoresResults(data, page) {
     storesString.push(generateNextPrevButtons("stores", page));
     storesString.join("");
     $('.js-pet-stores-results').html(storesString);
+    $('.js-aria-stores-results').html(`<p>${data.total} pet stores found.</p>`);
     drawMarkers(storesData, storesCoordinates, labels);
     return data;
 }

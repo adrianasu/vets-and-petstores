@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="description" content="Search pets available for adoption">
+    <meta name="description" content="Search veterinarians and pet stores 
+                                    within 10 miles of the zipcode provided by the user">
 	<meta name="author" content="Adriana Suarez">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
@@ -19,7 +20,6 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-	
 	<header role="banner" class="start js-start big"> 
 		<form class="js-form">
 			<fieldset name="pet-search">
@@ -29,7 +29,9 @@
 						<input type="text" id="zip-code" size="5" 
 							minlength="5" maxlength="5" required autofocus>	
 						<button role="button" type="submit" class="position-search-button">Search</button>
-						<div class="js-start-loader loader start-loader" hidden></div>
+                        <div class="js-start-loader loader start-loader" hidden>
+                            <span class="invisible-text" role="alert" aria-busy="true">Loading</span>
+                        </div>
 					</div>
 					<div class="img-wrapper">
 						<img src="https://veterinarysmallpetcare.files.wordpress.com/2015/05/pets-desktop-background-496176.jpg" 
@@ -39,12 +41,14 @@
 		</form>
 	</header>
 	<div class="wrapper">
-		<div class="js-errors errors"><p></p></div>
-		<div class="vets-results nested js-vets-results" hidden></div>
-		<div class="pet-stores-results nested js-pet-stores-results" hidden></div>
-		<div id="map" hidden></div>
+        <div class="js-errors errors" role="alert"><p></p></div>
+        <div class="js-aria-vets-results invisible-text" aria-live="assertive"></div>
+        <div class="js-aria-stores-results invisible-text" aria-live="assertive"></div>
+        <section class="vets-results nested js-vets-results" hidden></section>
+		<section class="pet-stores-results nested js-pet-stores-results" hidden></section>
+		<section id="map" hidden></section>
 	</div>
-	<div class="info-window js-info-window hide-it"></div>
+	<div class="info-window js-info-window hide-it" role="dialog"></div>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzvIv5HDpvcPzKaiyQrY6F8b4yLvIlmbM&callback=initMap">
