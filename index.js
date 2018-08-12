@@ -6,7 +6,7 @@ let map;
 let vetsData;
 let storesData;
 let zipcode;
-let vetsCoordinates =[];
+let vetsCoordinates = [];
 let storesCoordinates = [];
 let vetsMarkers = [];
 let storesMarkers = [];
@@ -14,13 +14,13 @@ let storesMarkers = [];
 function initMap(coordinates) {
     map = new google.maps.Map(document.getElementById('map'), {
         center: coordinates,
-        zoom: 9
+        zoom: 11
     });
 }
 
 function drawMarkers(data, locations, labels) {
     let color = (labels == "1234") ? "orangered" : "purple";
-  
+
     let markers = locations.map(function (location, i) {
         return new google.maps.Marker({
             position: location,
@@ -39,19 +39,17 @@ function drawMarkers(data, locations, labels) {
 
     if (labels == "1234") {
         storesMarkers = markers;
-    }
-    else {
+    } else {
         vetsMarkers = markers;
     }
 }
 
-function deleteMarkers(markers) {     
+function deleteMarkers(markers) {
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
     }
     return markers;
 }
-
 
 function getDataFromYelp(searchTerm, zipcode, callback, page) {
     let settings = {
@@ -62,7 +60,7 @@ function getDataFromYelp(searchTerm, zipcode, callback, page) {
         data: {
             term: searchTerm,
             location: zipcode,
-            radius: 24140,
+            radius: 16093,
             limit: 4,
             offset: page * 4,
         },
@@ -81,12 +79,11 @@ function getVetData(zipcode, page, callback) {
 
 function handleYelpError(xhr) {
     let message = "Something went wrong, please try again";
-        if (xhr && xhr.responseJSON && xhr.responseJSON.error && xhr.responseJSON.error.description) {
-            message = xhr.responseJSON.error.description;
-        }
-        showAndHideElements();
-        $('.js-start-loader').hide();
-        $('.js-errors>p').html(message).show();
+    if (xhr && xhr.responseJSON && xhr.responseJSON.error && xhr.responseJSON.error.description) {
+        message = xhr.responseJSON.error.description;
+    }
+    showAndHideElements();
+    $('.js-errors>p').html(message).show();
 }
 
 function getPetStoreData(zipcode, page, callback) {
@@ -108,14 +105,14 @@ function generateBizInfoString(selected) {
         data = vetsData;
         item = label.indexOf(selected.charAt(6));
     }
-    return `<div class="biz-info"><span class="close js-close">&times;</span>
+    return `<div class="biz-info"><button role="button" type="button" 
+            class="close js-close" aria-label="Close" aria-pressed="false">X</button>
             <h2>${data.businesses[item].name}</h2>
             <img src = "${data.businesses[item].image_url}">
             <p>${data.businesses[item].location.display_address[0]}</p>
             <p>${data.businesses[item].display_phone}</p>
             </div>`;
 }
-
 
 function generateObjectWithCoordinates(data, item) {
     let coordinates = {};
@@ -133,6 +130,7 @@ function displayVetsResults(data, page) {
         vetsString.push(`<p>Sorry, no results</p>`);
         vetsString.join("");
         $('.js-vets-results').html(vetsString);
+        $('.js-aria-vets-results').html(`<p>Sorry, no veterinarians found within 10 miles around ${zipcode}.</p>`);
         return data;
 
     }
@@ -146,6 +144,7 @@ function displayVetsResults(data, page) {
     vetsString.join("");
     $('.js-vets-results').html(vetsString);
     drawMarkers(vetsData, vetsCoordinates, labels);
+    $('.js-aria-vets-results').html(`<p>${data.total} veterinarians found.</p>`);
     return data;
 }
 
@@ -178,7 +177,7 @@ function setCenterOfMap(coordinateOrFirstResults, secondResults) {
 }
 
 function generateNextPrevButtons(term, page) {
-    let prevPage = (page !== 0) ? page-1 : 0;
+    let prevPage = (page !== 0) ? page - 1 : 0;
     return `<div class="js-button-wrapper button-wrapper"><button role="button" type="button" data-page="${prevPage}" data-term="${term}" class="next-prev js-prev">Prev</button>
             <button role="button" type="button" data-page="${page + 1}" data-term="${term}" class="next-prev js-next">Next</button>
             </div><div class="js-${term}-loader loader button-wrapper" hidden></div>`;
@@ -193,6 +192,7 @@ function displayPetStoresResults(data, page) {
         storesString.push(`<p>Sorry, no results</p>`);
         storesString.join("");
         $('.js-pet-stores-results').html(storesString);
+        $('.js-aria-stores-results').html(`<p>Sorry, no pet stores found within 10 miles around ${zipcode}.</p>`);
         return data;
     }
     storesString.push(`<p>Total results: ${data.total}</p><div class="options-wrapper">`);
@@ -204,30 +204,32 @@ function displayPetStoresResults(data, page) {
     storesString.push(generateNextPrevButtons("stores", page));
     storesString.join("");
     $('.js-pet-stores-results').html(storesString);
+    $('.js-aria-stores-results').html(`<p>${data.total} pet stores found.</p>`);
     drawMarkers(storesData, storesCoordinates, labels);
     return data;
 }
 
-function displayPopUpWithInfo(selected) {
-    $('.js-info-window').html(generateBizInfoString(selected)).removeClass("hide-it").addClass("show-it");
+function generateModalInfo(selected) {
+    $('.js-info-window').html(generateBizInfoString(selected));
 }
 
 function handleOptions(event) {
     event.stopPropagation();
     let selected = $(event.currentTarget).attr('data-option');
-    displayPopUpWithInfo(selected);
+    generateModalInfo(selected);
+    toggleInfoWindow();
 }
 
-function hidePopupWindow() {
-    $('.js-info-window').addClass("hide-it").removeClass("open");
+function toggleInfoWindow() {
+    $('.js-info-window').toggleClass('show-info-window');
+
 }
 
 function watchOptions() {
     $('.js-vets-results, .js-pet-stores-results').on('click', '.js-option', handleOptions);
-    $('.js-info-window').on('click', '.js-close', hidePopupWindow);
-    $(window).on('click', hidePopupWindow);
+    $('.js-info-window').on('click', '.js-close', toggleInfoWindow);
     $('.js-vets-results, .js-pet-stores-results').on('click', '.js-prev, .js-next', handleNextPrevButton);
- }
+}
 
 function handleNextPrevButton(event) {
     event.stopPropagation();
@@ -238,44 +240,40 @@ function handleNextPrevButton(event) {
         $('.js-vets-loader').show();
         deleteMarkers(vetsMarkers);
         vetsCoordinates = [];
-                return getVetData(zipcode, page)
-        .then(vets => {
-            vetsData = vets;
-                        if (vetsData.businesses.length || storesData.businesses.length) {
-                            //if code reaches here, both requests have been succesful
-                            setCenterOfMap(vetsData, storesData);
-                            displayVetsResults(vetsData, page);
-                            $('.js-vets-loader').hide();
-                            $('.js-button-wrapper').show();
-                        }
-                    });       
-    }
-    else {
+        return getVetData(zipcode, page)
+            .then(vets => {
+                vetsData = vets;
+                if (vetsData.businesses.length || storesData.businesses.length) {
+                    //if code reaches here, both requests have been succesful
+                    setCenterOfMap(vetsData, storesData);
+                    displayVetsResults(vetsData, page);
+                    $('.js-vets-loader').hide();
+                    $('.js-button-wrapper').show();
+                }
+            });
+    } else {
         $('.js-button-wrapper').hide();
         $('.js-stores-loader').show();
         deleteMarkers(storesMarkers);
         storesCoordinates = [];
-                return getPetStoreData(zipcode, page)
+        return getPetStoreData(zipcode, page)
             .then(petStores => {
                 storesData = petStores;
-                    if (vetsData.businesses.length || storesData.businesses.length) {
-                        //if code reaches here, both requests have been succesful
-                        setCenterOfMap(vetsData, storesData);
-                        displayPetStoresResults(storesData, page);
-                        $('.js-stores-loader').hide();
-                        $('.js-button-wrapper').show();
-                    }
-                });
-        
+                if (vetsData.businesses.length || storesData.businesses.length) {
+                    //if code reaches here, both requests have been succesful
+                    setCenterOfMap(vetsData, storesData);
+                    displayPetStoresResults(storesData, page);
+                    $('.js-stores-loader').hide();
+                    $('.js-button-wrapper').show();
+                }
+            });
     }
-  
 }
 
 function showAndHideElements() {
-    $('.js-start img, legend').hide();
-    $('.js-start fieldset').addClass('to-left');
+    $('.js-start img, legend, .js-start-loader').hide();
     $('.js-start').addClass('to-top invert-colors small').removeClass('to-middle big');
-    $('.js-start button').show();
+    $('.js-start button').addClass('light').removeClass('dark').show();
 }
 
 function handleSearch(event) {
@@ -304,26 +302,26 @@ function handleSearch(event) {
                     if (vetsData.businesses.length || storesData.businesses.length) {
                         setCenterOfMap(vets, petStores);
                         showAndHideElements();
-                        $('.js-start-loader').hide();
-                        $('.js-vets-results, .js-pet-stores-results, .js-start button, #map').show();
-                    } 
-                    else {
+                        $('.js-vets-results, .js-pet-stores-results, #map').removeClass('hide-it').show();
+                    } else {
                         showAndHideElements();
-                        $('.js-start-loader').hide();
-                        $('.js-vets-results, .js-pet-stores-results, .js-start button').show();
-
+                        $('.js-vets-results, .js-pet-stores-results').removeClass('hide-it').show();
                     }
                 });
-                    });
-    
+        });
 }
 
 function watchSubmitButton() {
     $('.js-form').on('submit', handleSearch);
 }
 
-function main() {
+function reset() {
     $('.js-vets-results, .js-pet-stores-results, #map').hide();
+    $('.js-start button').addClass('dark');
+}
+
+function main() {
+    reset();
     watchSubmitButton();
     watchOptions();
 }

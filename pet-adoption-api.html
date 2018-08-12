@@ -8,12 +8,10 @@
 	<title>Vets and Pet Stores</title>
 	<!-- Normalize.css, a cross-browser reset file -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Archivo+Black|Palanquin+Dark" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Nobile:700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
 	<link rel="stylesheet" href="main.css">
-		<!-- <link rel="stylesheet" href="landscape.css"> -->
+	<link rel="stylesheet" href="landscape.css">
 
 	<script
   src="https://code.jquery.com/jquery-3.3.1.js"
@@ -26,15 +24,19 @@
 		<form class="js-form">
 			<fieldset name="pet-search">
 				<legend>Find a Vet or Pet Store</legend>
-					<label for="zip-code">Zip Code</label>
+					<div class="start-wrapper">
+						<label for="zip-code">Zip Code</label>
 						<input type="text" id="zip-code" size="5" 
 							minlength="5" maxlength="5" required autofocus>	
+						<button role="button" type="submit" class="position-search-button">Search</button>
+						<div class="js-start-loader loader start-loader" hidden></div>
+					</div>
+					<div class="img-wrapper">
+						<img src="https://veterinarysmallpetcare.files.wordpress.com/2015/05/pets-desktop-background-496176.jpg" 
+						alt="Cats and dogs posing">	
+					</div> 
 			</fieldset>
-			<button role="button" type="submit" class="position-search-button">Search</button>
-			<div class="js-start-loader loader start-loader" hidden></div>
 		</form>
-		<img src="https://veterinarysmallpetcare.files.wordpress.com/2015/05/pets-desktop-background-496176.jpg" 
-			alt="Cats and dogs posing">	 
 	</header>
 	<div class="wrapper">
 		<div class="js-errors errors"><p></p></div>
