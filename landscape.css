@@ -4,92 +4,149 @@
         grid-template-rows: 50% 50%;
         grid-template-columns: 40% 60%;
     }
-
     .errors {
         grid-column: 1/3;
         margin: auto;
     }
-
     #map {
         height: 42em;
         grid-row: 1/3;
         grid-column: 2/3;
     }
-
     .start {
         width: 100%;
         font-size: 2.8em;
-    }
-
-    .small label {
-        float: left;
     }
 
     .pet-stores-results {
         grid-column: 1/2;
         grid-row: 2/3;
     }
-
     .vets-results {
         grid-column: 1/2;
         grid-row: 1/2;
     }
-
     .info-window {
         max-width: 100%;
-        height: 60%;
+        height: 80%;
     }
-
     .nested p {
         margin-right: .6em;
     }
-
     .loader {
         top: 0;
     }
-
-    .start-wrapper, 
+    .start-wrapper,
     .img-wrapper {
         width: 50%;
         float: left;
     }
-
-    #zip-code {
-        margin: .6em;
+    .zip-code {
+        margin-bottom: .3em;
+        width: 50%;
     }
     .start img {
-        max-width: 60%;
+        max-width: 80%;
+        margin: 1.3em auto;
     }
+    .big button {
+        font-size: .75em;
+        padding: .1em .6em;
+    }
+    .position-search-button {
+        margin: auto;
+    }
+    legend {
+        margin-bottom: .1em;
+        padding: .4em;
+    }
+    .small label,
+    .small button,
+    .small .zip-code {
+        display: inline-block;
+    }
+    .small form {
+        max-width: 100%;
+        border: none;
+        margin: 0 auto;
+        box-shadow: none;
+    }
+    .small .start-wrapper {
+        width: 100%;
+        font-size: .9em;
+        margin: auto;
+        text-align: center;
+    }
+     .small button {
+         padding: .15em .5em;
+     }
 
-    /* legend {
-     grid-row: 1/2;
-     grid-column: 1/3;
- }
+     .small label {
+         margin: .7em;
+     }
 
- .big label {
-     grid-row: 2/3;
-     grid-column: 2/3;
- }
-
- 
-
- .start button {
-     grid-row: 4/5;
-     grid-column: 2/3;
- }
-
-*/
+     .small .zip-code {
+         margin: .6em;
+         margin-right: 1.5em;
+         width: 25%;
+     }
 
 }
- 
- @media only screen and (min-device-width: 700px) {
-     #map {
-         height: 450px;
-     }
-     .small label {
-         margin-left: 10em;
-     }
-     .biz-info {
-         max-width: 40%;
-     }
- }
+
+@media only screen and (min-device-width: 825px) {
+    #map {
+        height: 450px;
+    }
+    .small label,
+    .small button,
+    .small .zip-code {
+        display: inline-block;
+    }
+    .biz-info {
+        max-width: 40%;
+    }
+    legend {
+        padding: .8em;
+    }
+    .big form {
+        max-width: 60%;
+        margin: auto;
+        border: 1px solid #00112b;
+        box-shadow: 5px 10px 8px #a3a8af;
+        margin-top: 1.5em;
+    }
+    .start button {
+        font-size: .8em;
+    }
+    .small button {
+        padding: .15em .5em;
+    }
+    .small form {
+        box-shadow: none;
+    }
+    
+    .small label {
+        margin-top: 0.7em;
+    }
+    .small .zip-code {
+        margin: .6em;
+        margin-right: 1.5em;
+        width: 12%;
+    }
+    
+    .start-wrapper {
+        margin: 1em auto;
+    }
+    .start img {
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+    .big label {
+        padding: 0;
+        margin: auto;
+        display: block;
+    }
+    .small loader {
+        margin-right: 5em;
+    }
+}

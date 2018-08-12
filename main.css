@@ -26,65 +26,83 @@ fieldset {
     padding-top: 1em;
 }
 
+.start button {
+    padding: .2em .6em;
+    display: block;
+    font-size: 0.7em;
+    transition: all .3s linear;
+}
 
-.start button, .next-prev {
-    background-color: white;
+.start button,
+.next-prev {
+    border: none;
     border-radius: 30px;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.05em;
+    font-size: .9em;
     letter-spacing: 0.05em;
     align-items: center;
     cursor: pointer;
 }
 
 .position-search-button {
-    margin: 1em auto;
+    margin: .5em auto;
 }
 
+.select-menu {
+    font-size: .8em;
+}
 
-
-.start button {
-    box-shadow: 2px 6px #00112b;
-    grid-row: 4/5;
+.dark {
+    background-color: #00112b;
+    box-shadow: 2px 6px lightgray;
+    color: white;
     border: 1px solid #00112b;
 }
 
-.next-prev {
-    padding: 0.5em 1em;
+.light {
+    background-color: white;
+    box-shadow: 2px 6px lightgray;
+    color: #00112b;
+    border: 1px solid white;
 }
 
-.next-prev, .position-next-prev {
+.next-prev {
+    font-weight: bold;
+    background-color: white;
+    padding: 0.5em 1em;
+    box-shadow: 0 4px 0 whitesmoke;
+    transition: all .1s linear;
+}
+
+.next-prev,
+.position-next-prev {
     margin-bottom: 0.6em;
     margin-right: 1em;
     margin-left: 1em;
 }
 
-.next-prev:focus, .next-prev:hover {
-    border: .2em solid whitesmoke;
+.next-prev:focus,
+.next-prev:hover,
+.next-prev:active {
+    box-shadow: 0 1px 0 whitesmoke;
+    color: gray;
     font-weight: bold;
+    transform: translateY(5px);
 }
 
-.start button:focus, .start button:hover {
-    box-shadow: 0 0 0 0.1em lightgray;
+.start button:focus,
+.start button:hover {
+    transform: translateY(10px);
     font-weight: bold;
-    color: #7d9dce;
+    background-color: #00112b;
+    color: white;
+    border-color: #00112b;
+    box-shadow: 2px 6px gray;
+    border: 1px solid whitesmoke;
 }
 
 .button-wrapper {
     text-align: center;
-}
-
-.big label {
-    display: block;
-    grid-row: 2/3;
-}
-
-.start button {
-    color: #00112b;
-    padding: 0em .4em;
-    display: block;
-    font-size: 0.7em;
 }
 
 .vets-results .next-prev {
@@ -104,27 +122,33 @@ fieldset {
     margin: .2em .3em;
     border-left: 3px solid lightgray;
     border-bottom: 4px solid lightgray;
+    transition-property: border-radius, color, background-color;
+    transition-duration: .2s;
+    transition-timing-function: linear;
 }
 
-.vets-results .option:hover, .vets-results .option:focus {
+.vets-results .option:hover,
+.vets-results .option:focus {
     border: 1.1px solid whitesmoke;
     color: purple;
     font-weight: bold;
     background-color: #e5d5ea;
+    border-radius: 5px 2px;
 }
 
-.pet-stores-results .option:hover, .pet-stores-results .option:focus {
+.pet-stores-results .option:hover,
+.pet-stores-results .option:focus {
     border: 1.1px solid whitesmoke;
     color: #f25400;
     font-weight: bold;
-    background-color: #f7d8c3
+    background-color: #f7d8c3;
+    border-radius: 5px 2px;
 }
 
 .start img {
-    max-width: 90%;
+    max-width: 70%;
     display: block;
-    margin: auto;
-    grid-row: 5/6;
+    margin: .9em auto;
 }
 
 .info-window img {
@@ -151,10 +175,8 @@ fieldset {
     letter-spacing: 0.5px;
 }
 
-.start {
-    display: grid;
-    grid-template-rows: 35% 17% 18% 15% 15%;
-    grid-template-columns: 100%;
+.small .start {
+    display: inline-block;
 }
 
 .invert-colors {
@@ -167,10 +189,9 @@ legend {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     background-color: #00112b;
-    padding: .5em 1em;
+    padding: .3em 1em;
     width: 100%;
-    margin-bottom: .5em;
-    grid-row: 1/2;
+    margin-bottom: .2em;
 }
 
 .down {
@@ -187,7 +208,12 @@ legend {
     line-height: 1.8em;
 }
 
-
+.small button {
+    display: inline-block;
+    font-size: .8em;
+    letter-spacing: 0.03em;
+    margin-left: 1em;
+}
 
 .small label {
     display: inline-block;
@@ -197,9 +223,17 @@ legend {
 
 .small button {
     box-shadow: 2px 3px #00112b;
+}
+
+.small .loader {
+    float: right;
+    margin: .6em 1em;   
+}
+
+.big label {
+    padding-left: 2em;
+    padding-right: 2em;
     margin: auto;
-    margin-bottom: 1em;
-    margin-top: 1em;
 }
 
 .errors {
@@ -213,17 +247,28 @@ legend {
     color: darkred;
 }
 
-#zip-code {
+.zip-code {
+    width: 50%;
     padding-left: 1em;
     padding-right: 1em;
     border: 1px solid #00112b;
     cursor: pointer;
     outline: none;
     box-shadow: none;
-    grid-row: 3/4;
 }
 
-.pet-stores-results, .vets-results {
+.zip-code:focus {
+    background-color: #e6f2ff;
+}
+
+.small .zip-code {
+    padding-left: .5em;
+    padding-right: .5em;
+    width: 25%;
+}
+
+.pet-stores-results,
+.vets-results {
     color: white;
     padding: .3em;
     font-size: 1.2em;
@@ -295,8 +340,14 @@ legend {
     left: 1em;
     top: 1em;
     width: 60%;
-    height: 50%;
+    height: 60%;
     overflow: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s,
+    opacity 0.25s 0s,
+    transform 0.25s;
 }
 
 .biz-info {
@@ -316,8 +367,6 @@ legend {
     font-size: 1.2em;
 }
 
-
-
 .close {
     color: darkslategray;
     float: right;
@@ -327,26 +376,36 @@ legend {
     border: none;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
+.show-info-window {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s,
+    opacity 0.25s 0s,
+    transform 0.25s;
+}
+
 .invisible-text {
     visibility: hidden;
-    position:absolute;
+    position: absolute;
     bottom: 0;
     left: 0;
 }
 
 .loader {
     margin: .5em auto;
-    border: 20px solid #f9f920;
-    border-top: 20px solid lightgray;
+    border: .5em solid lightgray;
+    border-top: .5em solid #f9f920;
     border-radius: 50%;
-    width: 1.6em;
-    height: 1.6em;
+    width: 2.4em;
+    height: 2.4em;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }

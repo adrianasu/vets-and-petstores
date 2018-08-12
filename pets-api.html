@@ -1,58 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="description" content="Search veterinarians and pet stores 
                                     within 10 miles of the zipcode provided by the user">
-	<meta name="author" content="Adriana Suarez">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta charset="UTF-8">
-	<title>Vets and Pet Stores</title>
-	<!-- Normalize.css, a cross-browser reset file -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
-	<link rel="stylesheet" href="main.css">
-	<link rel="stylesheet" href="landscape.css">
+    <meta name="author" content="Adriana Suarez">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Vets and Pet Stores</title>
+    <!-- Normalize.css, a cross-browser reset file -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="landscape.css">
 
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
+
 <body>
-	<header role="banner" class="start js-start big"> 
-		<form class="js-form">
-			<fieldset name="pet-search">
-				<legend>Find a Vet or Pet Store</legend>
-					<div class="start-wrapper">
-						<label for="zip-code">Zip Code</label>
-						<input type="text" id="zip-code" size="5" 
-							minlength="5" maxlength="5" required autofocus>	
-						<button role="button" type="submit" class="position-search-button">Search</button>
-                        <div class="js-start-loader loader start-loader" hidden>
-                            <span class="invisible-text" role="alert" aria-busy="true">Loading</span>
-                        </div>
-					</div>
-					<div class="img-wrapper">
-						<img src="https://veterinarysmallpetcare.files.wordpress.com/2015/05/pets-desktop-background-496176.jpg" 
-						alt="Cats and dogs posing">	
-					</div> 
-			</fieldset>
-		</form>
-	</header>
-	<div class="wrapper">
-        <div class="js-errors errors" role="alert"><p></p></div>
+    <header role="banner" class="start js-start big">
+        <form class="js-form">
+            <fieldset name="pet-search">
+                <legend>Find a Vet or Pet Store</legend>
+                <div class="start-wrapper">
+                    <label for="zip-code">Zip Code</label>
+                    <input type="text" id="zip-code" class="zip-code" minlength="5" maxlength="5" required autofocus>
+                    <button role="button" type="submit" class="dark position-search-button">Search</button>
+                    <div class="js-start-loader loader start-loader position-search-button" hidden>
+                        <span class="invisible-text" role="alert" aria-busy="true">Loading</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="https://veterinarysmallpetcare.files.wordpress.com/2015/05/pets-desktop-background-496176.jpg" alt="Cats and dogs posing">
+                </div>
+            </fieldset>
+        </form>
+    </header>
+    <div class="wrapper">
+        <div class="js-errors errors" role="alert">
+            <p></p>
+        </div>
         <div class="js-aria-vets-results invisible-text" aria-live="assertive"></div>
         <div class="js-aria-stores-results invisible-text" aria-live="assertive"></div>
-        <section class="vets-results nested js-vets-results" hidden></section>
-		<section class="pet-stores-results nested js-pet-stores-results" hidden></section>
-		<section id="map" hidden></section>
-	</div>
-	<div class="info-window js-info-window hide-it" role="dialog"></div>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzvIv5HDpvcPzKaiyQrY6F8b4yLvIlmbM&callback=initMap">
-</script>
-	<script type="text/javascript" src="index.js"></script>
+        <section class="vets-results nested js-vets-results hide-it"></section>
+        <section class="pet-stores-results nested js-pet-stores-results hide-it"></section>
+        <section id="map" hidden></section>
+    </div>
+<div class="info-window js-info-window" role="dialog" aria-modal="true"></div>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzvIv5HDpvcPzKaiyQrY6F8b4yLvIlmbM&callback=initMap">
+    </script>
+    <script type="text/javascript" src="index.js"></script>
 </body>
 </html>
