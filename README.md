@@ -5,17 +5,17 @@ a result is clicked on. Additionally, the location of each result will be shown 
 
 ##Link to app
 Go to PeTs ++ app now:
-![]
+
 
 ##Screenshots
 *Start/Landing Page
-![start page](screenshots/start_page.png)
+(screenshots/start_page.png)
 
 *Results Screen
-![results screen](screenshots/display_results.png)
+(screenshots/display_results.png)
 
 *Business Contact Info
-![contact_info](screenshots/contact-info.png)
+(screenshots/contact-info.png)
 
 ##Environment Setup
 HTML, JavaScript, Jquery and CSS.
