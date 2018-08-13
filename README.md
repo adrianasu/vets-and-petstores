@@ -1,14 +1,13 @@
 # PeTs ++
 An application to search for veterinarians and pet stores within 10 miles of any given zip code. 
-Results can be sorted by distance or by ratings. Address and phone number will be shown when
-a result is clicked on. Additionally, the location of each result will be shown on a map.
+Results can be sorted by distance or by ratings. Address and phone number of a business will be 
+shown when a result is clicked on. Additionally, the location of each result will be displayed on a map.
 
 ## Link to app
-Go to PeTs ++ app now:
-[live-app](https://vetsandpetstoresapiapp--agsmq.repl.co/)
+Go to  [PeTs++ app](https://vetsandpetstoresapiapp--agsmq.repl.co/) now
 
 ## Screenshots
-Start/Landing Page:
+Start Page:
 ![start](screenshots/start_page.png)
 
 Results Screen:
