@@ -8,12 +8,15 @@ Go to  [PeTs++ app](https://vetsandpetstoresapiapp--agsmq.repl.co/) now
 
 ## Screenshots
 Start Page:
+
 ![start](screenshots/start_page.png)
 
 Results Screen:
+
 ![results](screenshots/display_results.png)
 
 Business Contact Info:
+
 ![contactInfo](screenshots/contact_info.png)
 
 ## Environment Setup
