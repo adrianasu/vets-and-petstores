@@ -293,7 +293,7 @@ function handleSearch(event) {
     zipcodeInput.val("");
     let sortInput = $('#sort-by');
     sortBy = sortInput.val();
-    sortInput.val("Distance");
+    sortInput.val("distance");
     let vetsPage = 0;
     let storesPage = 0;
     return getPetStoreData(zipcode, storesPage, sortBy)
