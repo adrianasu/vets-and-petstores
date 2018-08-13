@@ -50,11 +50,11 @@
         </div>
         <div class="js-aria-vets-results invisible-text" aria-live="assertive"></div>
         <div class="js-aria-stores-results invisible-text" aria-live="assertive"></div>
-        <section class="vets-results nested js-vets-results hide-it"></section>
-        <section class="pet-stores-results nested js-pet-stores-results hide-it"></section>
+        <section class="vets-results nested js-vets-results hide-it" role="contentinfo" aria-label="Veterinarians Results"></section>
+        <section class="pet-stores-results nested js-pet-stores-results hide-it" role="contentinfo" aria-label="Pet Store Results"></section>
         <section id="map" hidden></section>
     </div>
-<div class="info-window js-info-window" role="dialog" aria-modal="true"></div>
+    <div class="info-window js-info-window" role="dialog" aria-modal="true"></div>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzvIv5HDpvcPzKaiyQrY6F8b4yLvIlmbM&callback=initMap">
