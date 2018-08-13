@@ -296,6 +296,8 @@ function showAndHideElements() {
     $('.js-start img, legend, .js-start-loader').hide();
     $('.js-start').addClass('to-top invert-colors small').removeClass('to-middle big');
     $('.js-start button').addClass('light').removeClass('dark').show();
+    $('#zip-code').val("");
+    $('#sort-by').val("distance");
 }
 
 function reset() {
@@ -316,10 +318,10 @@ function handleSearch(event) {
     $('.js-start-loader').show();
     let zipcodeInput = $('#zip-code');
     zipcode = zipcodeInput.val();
-    zipcodeInput.val("");
+    
     let sortInput = $('#sort-by');
     sortBy = sortInput.val();
-    sortInput.val("distance");
+    
     let page = 0;
     return getPetStoreData(zipcode, page, sortBy)
         .then(petStores => {
