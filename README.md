@@ -4,7 +4,7 @@ Results can be sorted by distance or by ratings. Address and phone number of a b
 shown when a result is clicked on. Additionally, the location of each result will be displayed on a map.
 
 ## Link to app
-Go to  [PeTs++ app](https://vetsandpetstoresapiapp--agsmq.repl.co/) now
+Go to  [PeTs++](https://adrianasu.github.io/vets-and-petstores/pets-api.html) app now.
 
 ## Screenshots
 Start Page:
