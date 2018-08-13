@@ -44,6 +44,11 @@
         margin-bottom: .3em;
     }
 
+    .big .start-wrapper {
+        margin-top: .3em;
+        
+    }
+
     .start-wrapper,
     .img-wrapper {
         width: 50%;
@@ -54,8 +59,8 @@
         width: 50%;
     }
     .start img {
-        max-width: 80%;
-        margin: 1.3em auto;
+        margin: 1em auto .1em auto;
+        max-width: 70%;
     }
     .big button {
         font-size: .75em;
@@ -66,7 +71,7 @@
     }
     legend {
         margin-bottom: .1em;
-        padding: .4em;
+        padding: 0;
     }
     .small label,
     .small button,
@@ -91,7 +96,8 @@
      }
 
      .small label {
-         margin: .7em;
+         margin: 0em;
+         
      }
 
      .small .select-menu {
@@ -102,6 +108,9 @@
          margin: .6em;
          margin-right: 1.5em;
          width: 25%;
+     }
+     .big label {
+         padding: 0;
      }
 
 
@@ -119,15 +128,20 @@
     .biz-info {
         max-width: 40%;
     }
+    .big h1 {
+            width: 60%;
+            margin: 2% 20% 0 20%;
+            box-shadow: 5px 10px 8px #a3a8af;
+    }
     legend {
-        padding: .8em;
+        padding: 0em;
     }
     .big form {
         max-width: 60%;
         margin: auto;
         border: 1px solid #00112b;
         box-shadow: 5px 10px 8px #a3a8af;
-        margin-top: 1.5em;
+        
     }
     .start button {
         font-size: .8em;
@@ -155,7 +169,7 @@
 
     .small .start-wrapper {
            text-align: center;
-           font-size: 1em;
+           font-size: .7em;
     }
     .start img {
             margin-top: 3em;
@@ -163,7 +177,6 @@
             max-width: 75%;
     }
     .big label {
-        padding: 0;
         margin: auto;
         display: block;
     }

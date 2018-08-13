@@ -102,287 +102,350 @@ fieldset {
 .small button:focus, .small button:hover {
     background-color: aliceblue;
 }
-    .select-menu {
-        font-size: .8em;
-        margin-bottom: .3em;
+
+.select-menu {
+    font-size: .8em;
+    margin-bottom: .3em;
+}
+
+select {
+    background-color: white;
+}
+
+.big .select-menu>label {
+    padding-right: .1em;
+    padding-left: 0;
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
+.vets-results .next-prev {
+    color: purple;
+}
+
+.pet-stores-results .next-prev {
+    color: #f25400;
+}
+
+.option {
+    background-color: white;
+    border-radius: 3px;
+    padding: .35em .2em;
+    text-decoration: none;
+    border: none;
+    margin: .2em .3em;
+    border-left: 3px solid lightgray;
+    border-bottom: 4px solid lightgray;
+    transition-property: border-radius, color, background-color;
+    transition-duration: .2s;
+    transition-timing-function: linear;
+}
+
+.vets-results .option:hover, .vets-results .option:focus {
+    border: 1.1px solid whitesmoke;
+    color: purple;
+    font-weight: bold;
+    background-color: #e5d5ea;
+    border-radius: 5px 2px;
+}
+
+.pet-stores-results .option:hover, .pet-stores-results .option:focus {
+    border: 1.1px solid whitesmoke;
+    color: #f25400;
+    font-weight: bold;
+    background-color: #f7d8c3;
+    border-radius: 5px 2px;
+}
+
+.start img {
+    max-width: 70%;
+    display: block;
+    margin: .9em auto;
+}
+
+.info-window img {
+    width: 10em;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-rows: 20% 20% auto;
+    grid-template-columns: 100%;
+}
+
+#map {
+    height: 25em;
+    grid-row: 3/4;
+}
+
+.start {
+    background-color: white;
+    width: 100%;
+    font-size: 1.5em;
+    color: #00112b;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.small .start {
+    display: inline-block;
+}
+
+.invert-colors {
+    background: #00112b;
+    color: white;
+}
+
+legend {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    background-color: #00112b;
+    padding: 0em 1em;
+    width: 100%;
+    margin-bottom: .2em;
+    font-size: .6em;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0;
+    color: #00112b;
+    background: #4286f4;
+    text-align: center;
+    padding: .15em 0;
+    font-family: 'Titan One', cursive;
+}
+
+.down {
+    margin-top: 0.6em;
+}
+
+.small {
+    line-height: 1.8em;
+    font-size: 1.8em;
+}
+
+.big {
+    font-size: 3em;
+    line-height: 1.8em;
+}
+
+.small .select-menu {
+    display: inline-block;
+    font-size: 1em;
+    margin-right: .4em;
+}
+
+.small button {
+    display: inline-block;
+    font-size: .8em;
+    letter-spacing: 0.03em;
+    margin-left: 1em;
+    box-shadow: 2px 3px #00112b;
+}
+
+.small label {
+    display: inline-block;
+    margin-left: 1em;
+    margin-top: .5em;
+}
+
+.small .loader {
+    float: right;
+    margin: .6em 1em;
+}
+
+.big label {
+    padding-left: 2em;
+    padding-right: 2em;
+    margin: auto;
+}
+
+.errors {
+    text-align: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .5em;
+    font-size: 1.7em;
+    line-height: 1.2em;
+    color: darkred;
+}
+
+.zip-code {
+    width: 55%;
+    padding-left: 1em;
+    padding-right: 1em;
+    border: 1px solid #00112b;
+    cursor: pointer;
+    outline: none;
+    box-shadow: none;
+}
+
+.zip-code:focus {
+    background-color: #e6f2ff;
+}
+
+.small .zip-code {
+    padding-left: .5em;
+    padding-right: .5em;
+    width: 25%;
+}
+
+.pet-stores-results, .vets-results {
+    color: white;
+    padding: .3em;
+    font-size: 1.2em;
+    letter-spacing: .05em;
+}
+
+.nested {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.nested h2 {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    margin: auto;
+    color: white;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.clear {
+    clear: both;
+}
+
+.to-left {
+    float: left;
+}
+
+.nested p {
+    grid-row: 1/2;
+    grid-column: 2/3;
+    text-align: right;
+    margin-right: 1.4em;
+    color: white;
+}
+
+.nested .button-wrapper {
+    grid-column: 1/3;
+    margin: auto;
+}
+
+.nested .options-wrapper {
+    grid-row: 2/3;
+    grid-column: 1/3;
+    align-items: stretch;
+}
+
+.pet-stores-results {
+    background-color: #f25400;
+    grid-row: 2/3;
+}
+
+.vets-results {
+    background-color: purple;
+    grid-row: 1/2;
+}
+
+.hide-it {
+    display: none !important;
+}
+
+.show-it {
+    display: block;
+}
+
+.info-window {
+    position: fixed;
+    z-index: 1;
+    left: 1em;
+    top: 1em;
+    width: 60%;
+    height: 60%;
+    overflow: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.biz-info {
+    background-color: #f4f9ff;
+    margin: 1em auto;
+    padding: 1em;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%;
+}
+
+.biz-info h2 {
+    font-size: 1.5em;
+}
+
+.biz-info p {
+    font-size: 1.2em;
+}
+
+.close {
+    color: darkslategray;
+    float: right;
+    font-size: 1.2em;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.show-info-window {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.invisible-text {
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.loader {
+    margin: .5em auto;
+    border: .42em solid lightgray;
+    border-top: .42em solid #f9f920;
+    border-radius: 50%;
+    width: 2.1em;
+    height: 2.1em;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
     }
-    select {
-        background-color: white;
+    100% {
+        -webkit-transform: rotate(360deg);
     }
-    .big .select-menu>label {
-        padding-right: .1em;
-        padding-left: 0;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
     }
-    .button-wrapper {
-        text-align: center;
+    100% {
+        transform: rotate(360deg);
     }
-    .vets-results .next-prev {
-        color: purple;
-    }
-    .pet-stores-results .next-prev {
-        color: #f25400;
-    }
-    .option {
-        background-color: white;
-        border-radius: 3px;
-        padding: .35em .2em;
-        text-decoration: none;
-        border: none;
-        margin: .2em .3em;
-        border-left: 3px solid lightgray;
-        border-bottom: 4px solid lightgray;
-        transition-property: border-radius, color, background-color;
-        transition-duration: .2s;
-        transition-timing-function: linear;
-    }
-    .vets-results .option:hover, .vets-results .option:focus {
-        border: 1.1px solid whitesmoke;
-        color: purple;
-        font-weight: bold;
-        background-color: #e5d5ea;
-        border-radius: 5px 2px;
-    }
-    .pet-stores-results .option:hover, .pet-stores-results .option:focus {
-        border: 1.1px solid whitesmoke;
-        color: #f25400;
-        font-weight: bold;
-        background-color: #f7d8c3;
-        border-radius: 5px 2px;
-    }
-    .start img {
-        max-width: 70%;
-        display: block;
-        margin: .9em auto;
-    }
-    .info-window img {
-        width: 10em;
-    }
-    .wrapper {
-        display: grid;
-        grid-template-rows: 20% 20% auto;
-        grid-template-columns: 100%;
-    }
-    #map {
-        height: 25em;
-        grid-row: 3/4;
-    }
-    .start {
-        background-color: white;
-        width: 100%;
-        font-size: 1.5em;
-        color: #00112b;
-        font-weight: bold;
-        letter-spacing: 0.5px;
-    }
-    .small .start {
-        display: inline-block;
-    }
-    .invert-colors {
-        background: #00112b;
-        color: white;
-    }
-    legend {
-        color: white;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-        background-color: #00112b;
-        padding: .3em 1em;
-        width: 100%;
-        margin-bottom: .2em;
-    }
-    .down {
-        margin-top: 0.6em;
-    }
-    .small {
-        line-height: 1.8em;
-        font-size: 1.8em;
-    }
-    .big {
-        font-size: 3em;
-        line-height: 1.8em;
-    }
-    .small .select-menu {
-        display: inline-block;
-        font-size: 1em;
-        margin-right: .4em;
-    }
-    .small button {
-        display: inline-block;
-        font-size: .8em;
-        letter-spacing: 0.03em;
-        margin-left: 1em;
-        box-shadow: 2px 3px #00112b;
-    }
-    .small label {
-        display: inline-block;
-        margin-left: 1em;
-        margin-top: 1em;
-    }
-    .small .loader {
-        float: right;
-        margin: .6em 1em;
-    }
-    .big label {
-        padding-left: 2em;
-        padding-right: 2em;
-        margin: auto;
-    }
-    .errors {
-        text-align: center;
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: .5em;
-        font-size: 1.7em;
-        line-height: 1.2em;
-        color: darkred;
-    }
-    .zip-code {
-        width: 50%;
-        padding-left: 1em;
-        padding-right: 1em;
-        border: 1px solid #00112b;
-        cursor: pointer;
-        outline: none;
-        box-shadow: none;
-    }
-    .zip-code:focus {
-        background-color: #e6f2ff;
-    }
-    .small .zip-code {
-        padding-left: .5em;
-        padding-right: .5em;
-        width: 25%;
-    }
-    .pet-stores-results, .vets-results {
-        color: white;
-        padding: .3em;
-        font-size: 1.2em;
-        letter-spacing: .05em;
-    }
-    .nested {
-        display: grid;
-        grid-template-columns: 50% 50%;
-    }
-    .nested h2 {
-        grid-row: 1/2;
-        grid-column: 1/2;
-        margin: auto;
-        color: white;
-        text-transform: uppercase;
-        font-weight: normal;
-    }
-    .clear {
-        clear: both;
-    }
-    .to-left {
-        float: left;
-    }
-    .nested p {
-        grid-row: 1/2;
-        grid-column: 2/3;
-        text-align: right;
-        margin-right: 1.4em;
-        color: white;
-    }
-    .nested .button-wrapper {
-        grid-column: 1/3;
-        margin: auto;
-    }
-    .nested .options-wrapper {
-        grid-row: 2/3;
-        grid-column: 1/3;
-        align-items: stretch;
-    }
-    .pet-stores-results {
-        background-color: #f25400;
-        grid-row: 2/3;
-    }
-    .vets-results {
-        background-color: purple;
-        grid-row: 1/2;
-    }
-    .hide-it {
-        display: none !important;
-    }
-    .show-it {
-        display: block;
-    }
-    .info-window {
-        position: fixed;
-        z-index: 1;
-        left: 1em;
-        top: 1em;
-        width: 60%;
-        height: 60%;
-        overflow: auto;
-        opacity: 0;
-        visibility: hidden;
-        transform: scale(1.1);
-        transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-    }
-    .biz-info {
-        background-color: #f4f9ff;
-        margin: 1em auto;
-        padding: 1em;
-        border-radius: 10px;
-        text-align: center;
-        max-width: 90%;
-    }
-    .biz-info h2 {
-        font-size: 1.5em;
-    }
-    .biz-info p {
-        font-size: 1.2em;
-    }
-    .close {
-        color: darkslategray;
-        float: right;
-        font-size: 1.2em;
-        text-decoration: none;
-        cursor: pointer;
-        border: none;
-    }
-    .close:hover, .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    .show-info-window {
-        opacity: 1;
-        visibility: visible;
-        transform: scale(1.0);
-        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-    }
-    .invisible-text {
-        visibility: hidden;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-    }
-    .loader {
-        margin: .5em auto;
-        border: .5em solid lightgray;
-        border-top: .5em solid #f9f920;
-        border-radius: 50%;
-        width: 2.4em;
-        height: 2.4em;
-        -webkit-animation: spin 2s linear infinite;
-        animation: spin 2s linear infinite;
-    }
-    @-webkit-keyframes spin {
-        0% {
-            -webkit-transform: rotate(0deg);
-        }
-        100% {
-            -webkit-transform: rotate(360deg);
-        }
-    }
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
+}

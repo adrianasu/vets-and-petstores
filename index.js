@@ -195,7 +195,9 @@ function generatePrevAndNextButtonsString(term, page) {
 }
 
 function generateNextPrevButtons(term, page, data) {
-    if (page === 0) {
+    if (page===0 && data.total<=4) {
+        return "";
+    } else if (page === 0 && data.total > 4) {
         return generateOnlyNextButtonString(term, page);
     } else if (data.businesses.length === 4 && data.total / (page + 1) > 0) {
         return generatePrevAndNextButtonsString(term, page);
