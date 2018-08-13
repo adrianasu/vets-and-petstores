@@ -26,6 +26,13 @@
                 <div class="start-wrapper">
                     <label for="zip-code">Zip Code</label>
                     <input type="text" id="zip-code" class="zip-code" minlength="5" maxlength="5" required autofocus>
+                    <div class="select-menu">
+                        <label for="sort-by">Sort by:</label>
+                        <select id="sort-by">
+                            <option value="distance" selected>Distance</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </div>
                     <button role="button" type="submit" class="dark position-search-button">Search</button>
                     <div class="js-start-loader loader start-loader position-search-button" hidden>
                         <span class="invisible-text" role="alert" aria-busy="true">Loading</span>
