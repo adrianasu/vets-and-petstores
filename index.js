@@ -134,7 +134,6 @@ function displayVetsResults(data, page) {
         $('.js-vets-results').html(vetsString);
         $('.js-aria-vets-results').html(`<p>Sorry, no veterinarians found within 10 miles around ${zipcode}.</p>`);
         return data;
-
     }
     vetsString.push(`<p>Total results: ${data.total}</p><div class="options-wrapper">`);
     for (let i = 0; i < vetsData.businesses.length; i++) {
@@ -142,7 +141,7 @@ function displayVetsResults(data, page) {
         vetsCoordinates.push(generateObjectWithCoordinates(vetsData, i));
     }
     vetsString.push(`</div>`);
-    vetsString.push(generateNextPrevButtons("vets", page));
+    vetsString.push(generateNextPrevButtons("vets", page, data));
     vetsString.join("");
     $('.js-vets-results').html(vetsString);
     drawMarkers(vetsData, vetsCoordinates, labels);
@@ -164,10 +163,8 @@ function setCenterOfMap(coordinateOrFirstResults, secondResults) {
             allLong.push(secondResults.businesses[i].coordinates.longitude);
             allLat.push(secondResults.businesses[i].coordinates.latitude);
         }
-        allLong.sort();
-        allLat.sort();
-        let averageLong = allLong[0] + (allLong[allLong.length - 1] - allLong[0]) / 2;
-        let averageLat = allLat[0] + (allLat[allLat.length - 1] - allLat[0]) / 2;
+        let averageLong = allLong.reduce((a, b) => a + b, 0) / (allLong.length);
+        let averageLat = allLat.reduce((a, b) => a + b, 0) / (allLat.length);
         coordinate = {
             lng: averageLong,
             lat: averageLat
@@ -178,11 +175,33 @@ function setCenterOfMap(coordinateOrFirstResults, secondResults) {
     }
 }
 
-function generateNextPrevButtons(term, page) {
-    let prevPage = (page !== 0) ? page - 1 : 0;
-    return `<div class="js-button-wrapper button-wrapper"><button role="button" type="button" data-page="${prevPage}" data-term="${term}" class="next-prev js-prev">Prev</button>
+function generateOnlyNextButtonString(term, page) {
+    return `<div class="js-button-wrapper button-wrapper">
+            <button role="button" type="button" data-page="${page + 1}" data-term="${term}" 
+            class="next-prev js-next">Next</button>
+            </div><div class="js-${term}-loader loader button-wrapper" hidden></div>`;
+}
+
+function generateOnlyPrevButtonString(term,page) {
+    return `<div class="js-button-wrapper button-wrapper"><button role="button" type="button" 
+            data-page="${page - 1}" data-term="${term}" class="next-prev js-prev">Prev</button>
+            </div><div class="js-${term}-loader loader button-wrapper" hidden></div>`;
+}
+
+function generatePrevAndNextButtonsString(term, page) {
+    return `<div class="js-button-wrapper button-wrapper"><button role="button" type="button" data-page="${page - 1}" data-term="${term}" class="next-prev js-prev">Prev</button>
             <button role="button" type="button" data-page="${page + 1}" data-term="${term}" class="next-prev js-next">Next</button>
             </div><div class="js-${term}-loader loader button-wrapper" hidden></div>`;
+}
+
+function generateNextPrevButtons(term, page, data) {
+    if (page === 0) {
+        return generateOnlyNextButtonString(term, page);
+    } else if (data.businesses.length === 4 && data.total / (page + 1) > 0) {
+        return generatePrevAndNextButtonsString(term, page);
+    } else {
+        return generateOnlyPrevButtonString(term, page);
+    }
 }
 
 function displayPetStoresResults(data, page) {
@@ -203,7 +222,7 @@ function displayPetStoresResults(data, page) {
         storesCoordinates.push(generateObjectWithCoordinates(storesData, i));
     }
     storesString.push(`</div>`);
-    storesString.push(generateNextPrevButtons("stores", page));
+    storesString.push(generateNextPrevButtons("stores", page, data));
     storesString.join("");
     $('.js-pet-stores-results').html(storesString);
     $('.js-aria-stores-results').html(`<p>${data.total} pet stores found.</p>`);
@@ -224,7 +243,6 @@ function handleOptions(event) {
 
 function toggleInfoWindow() {
     $('.js-info-window').toggleClass('show-info-window');
-
 }
 
 function watchOptions() {
@@ -278,32 +296,37 @@ function showAndHideElements() {
     $('.js-start button').addClass('light').removeClass('dark').show();
 }
 
-function handleSearch(event) {
-    event.preventDefault();
+function reset() {
     $('.js-vets-results, .js-pet-stores-results, #map, .js-errors>p, .js-start button').hide();
     $('.js-start fieldset').addClass('clear');
-    $('.js-start-loader').show();
+    deleteMarkers(vetsMarkers);
+    deleteMarkers(storesMarkers);
     vetsData = {};
     storesData = {};
     vetsCoordinates = [];
     storesCoordinates = [];
     zipcode = 0;
+}
+
+function handleSearch(event) {
+    event.preventDefault();
+    reset();
+    $('.js-start-loader').show();
     let zipcodeInput = $('#zip-code');
     zipcode = zipcodeInput.val();
     zipcodeInput.val("");
     let sortInput = $('#sort-by');
     sortBy = sortInput.val();
     sortInput.val("distance");
-    let vetsPage = 0;
-    let storesPage = 0;
-    return getPetStoreData(zipcode, storesPage, sortBy)
+    let page = 0;
+    return getPetStoreData(zipcode, page, sortBy)
         .then(petStores => {
             storesData = petStores;
-            return getVetData(zipcode, vetsPage, sortBy)
+            return getVetData(zipcode, page, sortBy)
                 .then(vets => {
                     vetsData = vets;
-                    displayPetStoresResults(storesData, storesPage);
-                    displayVetsResults(vetsData, vetsPage);
+                    displayPetStoresResults(storesData, page);
+                    displayVetsResults(vetsData, page);
                     if (vetsData.businesses.length || storesData.businesses.length) {
                         setCenterOfMap(vets, petStores);
                         showAndHideElements();
@@ -320,13 +343,13 @@ function watchSubmitButton() {
     $('.js-form').on('submit', handleSearch);
 }
 
-function reset() {
+function showStartPage() {
     $('.js-vets-results, .js-pet-stores-results, #map').hide();
     $('.js-start button').addClass('dark');
 }
 
 function main() {
-    reset();
+    showStartPage();
     watchSubmitButton();
     watchOptions();
 }
