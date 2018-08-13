@@ -6,6 +6,7 @@ let map;
 let vetsData;
 let storesData;
 let zipcode;
+let sortBy;
 let vetsCoordinates = [];
 let storesCoordinates = [];
 let vetsMarkers = [];
@@ -14,7 +15,7 @@ let storesMarkers = [];
 function initMap(coordinates) {
     map = new google.maps.Map(document.getElementById('map'), {
         center: coordinates,
-        zoom: 11
+        zoom: 10
     });
 }
 
@@ -51,7 +52,7 @@ function deleteMarkers(markers) {
     return markers;
 }
 
-function getDataFromYelp(searchTerm, zipcode, callback, page) {
+function getDataFromYelp(searchTerm, zipcode, callback, page, sortBy) {
     let settings = {
         url: cors_url + yelp_url,
         headers: {
@@ -60,9 +61,10 @@ function getDataFromYelp(searchTerm, zipcode, callback, page) {
         data: {
             term: searchTerm,
             location: zipcode,
-            radius: 16093,
             limit: 4,
             offset: page * 4,
+            sort_by: sortBy,
+            radius: 16092
         },
         type: "GET",
         dataType: "json",
@@ -71,9 +73,9 @@ function getDataFromYelp(searchTerm, zipcode, callback, page) {
     return $.ajax(settings);
 }
 
-function getVetData(zipcode, page, callback) {
+function getVetData(zipcode, page, sortBy, callback) {
     let term = "veterinarians";
-    return getDataFromYelp(term, zipcode, callback, page)
+    return getDataFromYelp(term, zipcode, callback, page, sortBy)
         .catch(handleYelpError);
 }
 
@@ -86,9 +88,9 @@ function handleYelpError(xhr) {
     $('.js-errors>p').html(message).show();
 }
 
-function getPetStoreData(zipcode, page, callback) {
+function getPetStoreData(zipcode, page, sortBy, callback) {
     let term = "pet stores";
-    return getDataFromYelp(term, zipcode, callback, page)
+    return getDataFromYelp(term, zipcode, callback, page, sortBy)
         .catch(handleYelpError);
 }
 
@@ -240,7 +242,7 @@ function handleNextPrevButton(event) {
         $('.js-vets-loader').show();
         deleteMarkers(vetsMarkers);
         vetsCoordinates = [];
-        return getVetData(zipcode, page)
+        return getVetData(zipcode, page, sortBy)
             .then(vets => {
                 vetsData = vets;
                 if (vetsData.businesses.length || storesData.businesses.length) {
@@ -256,7 +258,7 @@ function handleNextPrevButton(event) {
         $('.js-stores-loader').show();
         deleteMarkers(storesMarkers);
         storesCoordinates = [];
-        return getPetStoreData(zipcode, page)
+        return getPetStoreData(zipcode, page, sortBy)
             .then(petStores => {
                 storesData = petStores;
                 if (vetsData.businesses.length || storesData.businesses.length) {
@@ -289,12 +291,15 @@ function handleSearch(event) {
     let zipcodeInput = $('#zip-code');
     zipcode = zipcodeInput.val();
     zipcodeInput.val("");
+    let sortInput = $('#sort-by');
+    sortBy = sortInput.val();
+    sortInput.val("Distance");
     let vetsPage = 0;
     let storesPage = 0;
-    return getPetStoreData(zipcode, storesPage)
+    return getPetStoreData(zipcode, storesPage, sortBy)
         .then(petStores => {
             storesData = petStores;
-            return getVetData(zipcode, vetsPage)
+            return getVetData(zipcode, vetsPage, sortBy)
                 .then(vets => {
                     vetsData = vets;
                     displayPetStoresResults(storesData, storesPage);

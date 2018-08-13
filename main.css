@@ -92,13 +92,28 @@ fieldset {
 
 .start button:focus,
 .start button:hover {
-    transform: translateY(10px);
+    transform: translateY(8px);
     font-weight: bold;
     background-color: #00112b;
     color: white;
     border-color: #00112b;
     box-shadow: 2px 6px gray;
     border: 1px solid whitesmoke;
+}
+
+.select-menu {
+    font-size: .8em;
+    margin-bottom: .3em;
+}
+
+select {
+       background-color: white;
+
+}
+
+.big .select-menu>label {
+    padding-right: .1em;
+    padding-left: 0;
 }
 
 .button-wrapper {
@@ -208,21 +223,25 @@ legend {
     line-height: 1.8em;
 }
 
+.small .select-menu {
+    display: inline-block;
+    font-size: 1em;
+    margin-right: .4em;
+}
+
+
 .small button {
     display: inline-block;
     font-size: .8em;
     letter-spacing: 0.03em;
     margin-left: 1em;
+    box-shadow: 2px 3px #00112b;
 }
 
 .small label {
     display: inline-block;
     margin-left: 1em;
     margin-top: 1em;
-}
-
-.small button {
-    box-shadow: 2px 3px #00112b;
 }
 
 .small .loader {
