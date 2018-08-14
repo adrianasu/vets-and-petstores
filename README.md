@@ -24,7 +24,7 @@ HTML, JavaScript, JQuery and CSS.
 
 ## Features
 * Search for veterinarians and pet stores 
-* Sort by distance or ratings
+* Sort results by distance or ratings
 * Show contact info of a business
 * Show locations on a map
 
