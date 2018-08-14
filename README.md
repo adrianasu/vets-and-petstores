@@ -20,7 +20,7 @@ Business Contact Info:
 ![contactInfo](screenshots/contact_info.png)
 
 ## Environment Setup
-HTML, JavaScript, Jquery and CSS.
+HTML, JavaScript, JQuery and CSS.
 
 ## Features
 * Search for veterinarians and pet stores 
