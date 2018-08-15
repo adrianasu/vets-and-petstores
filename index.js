@@ -147,26 +147,22 @@ function displayVetsResults(data, page) {
     return data;
 }
 
-function setCenterOfMap(coordinateOrFirstResults, secondResults) {
-    let coordinate = coordinateOrFirstResults;
+function setCenterOfMap(firstResults, secondResults) {
     let allLong = [];
     let allLat = [];
-
-    if (arguments.length === 2) {
-        for (let i = 0; i < coordinateOrFirstResults.businesses.length; i++) {
-            allLong.push(coordinateOrFirstResults.businesses[i].coordinates.longitude);
-            allLat.push(coordinateOrFirstResults.businesses[i].coordinates.latitude);
-        }
-        for (let i = 0; i < secondResults.businesses.length; i++) {
-            allLong.push(secondResults.businesses[i].coordinates.longitude);
-            allLat.push(secondResults.businesses[i].coordinates.latitude);
-        }
-        let averageLong = allLong.reduce((a, b) => a + b, 0) / (allLong.length);
-        let averageLat = allLat.reduce((a, b) => a + b, 0) / (allLat.length);
-        coordinate = {
-            lng: averageLong,
-            lat: averageLat
-        }
+    for (let i = 0; i < firstResults.businesses.length; i++) {
+        allLong.push(firstResults.businesses[i].coordinates.longitude);
+        allLat.push(firstResults.businesses[i].coordinates.latitude);
+    }
+    for (let i = 0; i < secondResults.businesses.length; i++) {
+        allLong.push(secondResults.businesses[i].coordinates.longitude);
+        allLat.push(secondResults.businesses[i].coordinates.latitude);
+    }
+    let averageLong = allLong.reduce((a, b) => a + b, 0) / (allLong.length);
+    let averageLat = allLat.reduce((a, b) => a + b, 0) / (allLat.length);
+    let coordinate = {
+        lng: averageLong,
+        lat: averageLat
     }
     if (map) {
         map.setCenter(coordinate);
@@ -316,10 +312,8 @@ function handleSearch(event) {
     $('.js-start-loader').show();
     let zipcodeInput = $('#zip-code');
     zipcode = zipcodeInput.val();
-    
     let sortInput = $('#sort-by');
     sortBy = sortInput.val();
-    
     let page = 0;
     return getPetStoreData(zipcode, page, sortBy)
         .then(petStores => {
