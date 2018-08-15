@@ -1,4 +1,3 @@
-const rescue_org_url = "https://api.rescuegroups.org/http/";
 const yelp_url = "https://api.yelp.com/v3/businesses/search";
 const cors_url = "https://cors-anywhere.herokuapp.com/";
 const yelp_key = "SWqIeR03-4XLVB2rjSFheWjyG83SJbP_2TlwQGQF1AJhCq77pgSLmihlbN6TDYNg5ErnOPjjRs2YrRLeqx_riAQDuUXQdOb-pcv-ktebeXRa_BT3Wf7gNaS5j_teW3Yx";
@@ -52,7 +51,7 @@ function deleteMarkers(markers) {
     return markers;
 }
 
-function getDataFromYelp(searchTerm, zipcode, callback, page, sortBy) {
+function getDataFromYelp(searchTerm, zipcode, page, sortBy) {
     let settings = {
         url: cors_url + yelp_url,
         headers: {
@@ -67,15 +66,14 @@ function getDataFromYelp(searchTerm, zipcode, callback, page, sortBy) {
             radius: 16092
         },
         type: "GET",
-        dataType: "json",
-        success: callback
+        dataType: "json"
     };
     return $.ajax(settings);
 }
 
-function getVetData(zipcode, page, sortBy, callback) {
+function getVetData(zipcode, page, sortBy) {
     let term = "veterinarians";
-    return getDataFromYelp(term, zipcode, callback, page, sortBy)
+    return getDataFromYelp(term, zipcode, page, sortBy)
         .catch(handleYelpError);
 }
 
@@ -88,9 +86,9 @@ function handleYelpError(xhr) {
     $('.js-errors>p').html(message).show();
 }
 
-function getPetStoreData(zipcode, page, sortBy, callback) {
+function getPetStoreData(zipcode, page, sortBy) {
     let term = "pet stores";
-    return getDataFromYelp(term, zipcode, callback, page, sortBy)
+    return getDataFromYelp(term, zipcode, page, sortBy)
         .catch(handleYelpError);
 }
 
