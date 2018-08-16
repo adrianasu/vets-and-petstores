@@ -92,7 +92,7 @@ function getPetStoreData(zipcode, page, sortBy) {
         .catch(handleYelpError);
 }
 
-function generateButtonString(data, item, labels) {
+function generateOptionButtonString(data, item, labels) {
     return `<button type="button" role="button" class="option js-option" data-option="option${labels.charAt(item)}">
                 ${labels.charAt(item)}.  ${data.businesses[item].name}</button>`;
 }
@@ -135,7 +135,7 @@ function displayVetsResults(data, page) {
     }
     vetsString.push(`<p>Total results: ${data.total}</p><div class="options-wrapper">`);
     for (let i = 0; i < vetsData.businesses.length; i++) {
-        vetsString.push(generateButtonString(vetsData, i, labels));
+        vetsString.push(generateOptionButtonString(vetsData, i, labels));
         vetsCoordinates.push(generateObjectWithCoordinates(vetsData, i));
     }
     vetsString.push(`</div>`);
@@ -214,7 +214,7 @@ function displayPetStoresResults(data, page) {
     }
     storesString.push(`<p>Total results: ${data.total}</p><div class="options-wrapper">`);
     for (let i = 0; i < storesData.businesses.length; i++) {
-        storesString.push(generateButtonString(storesData, i, labels));
+        storesString.push(generateOptionButtonString(storesData, i, labels));
         storesCoordinates.push(generateObjectWithCoordinates(storesData, i));
     }
     storesString.push(`</div>`);

@@ -35,7 +35,7 @@ fieldset {
 
 .start button, .next-prev {
     border: none;
-    border-radius: 30px;
+    border-radius: 8px;
     text-decoration: none;
     font-size: .9em;
     letter-spacing: 0.05em;
@@ -167,6 +167,7 @@ select {
 
 .info-window img {
     width: 10em;
+    margin-top: 2em;
 }
 
 .wrapper {
@@ -277,8 +278,7 @@ h1 {
 
 .zip-code {
     width: 55%;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: .5em;
     border: 1px solid #00112b;
     cursor: pointer;
     outline: none;
@@ -367,7 +367,7 @@ h1 {
     left: 1em;
     top: 1em;
     width: 60%;
-    height: 60%;
+    height: 70%;
     overflow: auto;
     opacity: 0;
     visibility: hidden;
@@ -377,11 +377,10 @@ h1 {
 
 .biz-info {
     background-color: #f4f9ff;
-    margin: 1em auto;
-    padding: 1em;
+    padding: 2em;
     border-radius: 10px;
     text-align: center;
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .biz-info h2 {
