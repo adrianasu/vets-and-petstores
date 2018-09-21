@@ -290,6 +290,7 @@ function showAndHideElements() {
     $('.js-start img, legend, .js-start-loader').hide();
     $('.js-start').addClass('to-top invert-colors small').removeClass('to-middle big');
     $('.js-start button').addClass('light').removeClass('dark').show();
+    $('.box').addClass('small');
     $('#zip-code').val("");
     $('#sort-by').val("distance");
 }
@@ -297,6 +298,7 @@ function showAndHideElements() {
 function reset() {
     $('.js-vets-results, .js-pet-stores-results, #map, .js-errors>p, .js-start button').hide();
     $('.js-start fieldset').addClass('clear');
+    $('.box').removeClass('small');
     deleteMarkers(vetsMarkers);
     deleteMarkers(storesMarkers);
     vetsData = {};

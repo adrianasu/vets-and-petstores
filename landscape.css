@@ -138,10 +138,17 @@
     .biz-info {
         max-width: 50%;
     }
+    .box {
+        box-shadow: 5px 10px 8px #a3a8af;
+        width: 60%;
+    }
+    .small .box {
+        width: 100%;
+        box-shadow: none;
+    }
     .big h1 {
             width: 60%;
-            margin: 2% 20% 0 20%;
-            box-shadow: 5px 10px 8px #a3a8af;
+            margin: 2% 20% 0 20%;    
     }
     legend {
         padding: 0em;

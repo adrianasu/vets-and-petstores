@@ -35,7 +35,7 @@ fieldset {
 
 .start button, .next-prev {
     border: none;
-    border-radius: 8px;
+    border-radius: 25px;
     text-decoration: none;
     font-size: .9em;
     letter-spacing: 0.05em;
@@ -110,6 +110,10 @@ fieldset {
 
 select {
     background-color: white;
+}
+
+select:hover, select:focus {
+    font-size: 1.5em;
 }
 
 .big .select-menu>label {
@@ -210,14 +214,103 @@ legend {
     font-size: .6em;
 }
 
+.box {
+    background: #4286f4;
+    width: 100%;
+    margin: auto;
+}
+
 h1 {
     font-size: 2em;
     margin: 0;
     color: #00112b;
-    background: #4286f4;
     text-align: center;
     padding: .15em 0;
     font-family: 'Titan One', cursive;
+}
+
+.animated {
+    -webkit-animation-duration: .8s;
+    animation-duration: .8s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes bounceInRight {
+    0% {
+        -webkit-transform: translateX(1000px);
+    }
+    60% {
+        -webkit-transform: translateX(-30px);
+    }
+    80% {
+        -webkit-transform: translateX(10px);
+    }
+    100% {
+        -webkit-transform: translateX(0);
+    }
+}
+
+@keyframes bounceInRight {
+    0% {
+        transform: translateX(1000px);
+    }
+    60% {
+        transform: translateX(-30px);
+    }
+    80% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.bounceInRight {
+    -webkit-animation-name: bounceInRight;
+    animation-name: bounceInRight;
+}
+
+.animated-img {
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-iteration-count: 2;
+    animation-iteration-count: 2;
+    -webkit-animation-delay: .1s;
+    animation-delay: .1s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes bounce {
+    0% {
+        -webkit-transform: translateY(-10px);
+    }
+    50% {
+        -webkit-transform: translateY(20px);
+    }
+    100% {
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bounce {
+    -webkit-animation-name: bounce;
+    animation-name: bounce;
 }
 
 .down {
@@ -277,16 +370,19 @@ h1 {
 }
 
 .zip-code {
-    width: 55%;
+    width: 45%;
     padding-left: .5em;
-    border: 1px solid #00112b;
+    border: none;
+    border-bottom: 1px solid #00112b;
     cursor: pointer;
     outline: none;
     box-shadow: none;
+    text-align: center;
 }
 
-.zip-code:focus {
-    background-color: #e6f2ff;
+.zip-code:focus, .zip-code:hover {
+    background-color: rgb(237, 242, 248);
+    width: 55%;
 }
 
 .small .zip-code {
