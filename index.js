@@ -19,7 +19,7 @@ function initMap(coordinates) {
 }
 
 function drawMarkers(data, locations, labels) {
-    let color = (labels == "1234") ? "orangered" : "purple";
+    let color = (labels == "1234") ? "#ffcd00" : "#17b978";
 
     let markers = locations.map(function (location, i) {
         return new google.maps.Marker({
@@ -133,12 +133,12 @@ function displayVetsResults(data, page) {
         $('.js-aria-vets-results').html(`<p>Sorry, no veterinarians found within 10 miles around ${zipcode}.</p>`);
         return data;
     }
-    vetsString.push(`<p>Total results: ${data.total}</p><div class="options-wrapper">`);
+    vetsString.push(`<p>Total results: ${data.total}</p>`);
     for (let i = 0; i < vetsData.businesses.length; i++) {
         vetsString.push(generateOptionButtonString(vetsData, i, labels));
         vetsCoordinates.push(generateObjectWithCoordinates(vetsData, i));
     }
-    vetsString.push(`</div>`);
+    //vetsString.push(`</div>`);
     vetsString.push(generateNextPrevButtons("vets", page, data));
     vetsString.join("");
     $('.js-vets-results').html(vetsString);
