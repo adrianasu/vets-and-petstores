@@ -140,8 +140,8 @@ select:hover, select:focus {
 
 .pet-stores-results .option,
 .vets-results .option {
-    border-left: 3px solid lightgray;
-    border-top: 1px solid lightgray;
+    border-radius: 20px;
+    border: 1px solid #ebf0f6;
 }
 
 .vets-results .option:hover, 
