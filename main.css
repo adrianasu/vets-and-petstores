@@ -87,7 +87,7 @@ fieldset {
 }
 
 .start button:focus, .start button:hover {
-    transform: translateY(8px);
+    transform: translateY(2px);
     font-weight: bold;
 }
 
@@ -110,10 +110,6 @@ fieldset {
 
 select {
     background-color: white;
-}
-
-select:hover, select:focus {
-    font-size: 1.5em;
 }
 
 .big .select-menu>label {
@@ -145,20 +141,11 @@ select:hover, select:focus {
 }
 
 .vets-results .option:hover, 
-.vets-results .option:focus {
-    border: 1.1px solid #17b978;
-    font-weight: bold;
-    background-color: #17b978;
-    border-radius: 5px 2px;
-    outline: none;
-}
-
+.vets-results .option:focus,
 .pet-stores-results .option:hover, 
 .pet-stores-results .option:focus {
-    border: 1.1px solid #ffcd00;
     font-weight: bold;
-    background-color: #ffcd00;
-    border-radius: 5px 2px;
+    background-color: #f2f3f3;
     outline: none;
 }
 
@@ -496,7 +483,7 @@ h1 {
 }
 
 .biz-info {
-    background-color: #f4f9ff;
+    background-color: #f2eee0;
     padding: 2em;
     border-radius: 10px;
     text-align: center;
@@ -513,6 +500,7 @@ h1 {
 
 .close {
     color: darkslategray;
+    background-color: #f2eee0;
     float: right;
     font-size: 1.2em;
     text-decoration: none;
@@ -522,6 +510,7 @@ h1 {
 
 .close:hover, .close:focus {
     color: black;
+    font-weight: bold;
     text-decoration: none;
     cursor: pointer;
 }

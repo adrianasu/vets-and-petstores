@@ -195,11 +195,9 @@
     }
     
     .small label {
-        /* display: inline-block; */
         margin-top: 0.7em;
     }
     .small .zip-code {
-        /* display: inline-block; */
         margin: .6em;
         margin-right: 1.5em;
         width: 12%;
